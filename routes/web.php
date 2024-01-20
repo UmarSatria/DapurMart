@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// 
+//
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// HOME PAGE WEB
+Route::get('/grosir', function () {
+    return view('layouts.grosir');
+})->name('grosir');
+
+Auth::routes();
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
