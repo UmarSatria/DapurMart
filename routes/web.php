@@ -32,3 +32,7 @@ Route::get('/grosir', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// LOGIN PAGE
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+
