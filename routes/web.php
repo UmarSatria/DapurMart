@@ -19,8 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 //
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -29,10 +27,12 @@ Route::get('/grosir', function () {
     return view('layouts.grosir');
 })->name('grosir');
 
+// LOGIN PAGE
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLogin'])->name('login');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// LOGIN PAGE
-Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+// login admin
+Route::middleware(['auth', 'role:Admin'])->group(function (){
+    Route::resource('home', HomeController::class);
+});
 
