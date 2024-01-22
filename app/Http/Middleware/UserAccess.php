@@ -12,13 +12,18 @@ class UserAccess
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth()->user()->role == 'Admin'){
+        if (Auth::check() && Auth::user()->role == 'Admin') {
             return $next($request);
         }
-        return to_route('halamanuser.index');
+
+        // Jika kondisi tidak terpenuhi, Anda dapat mengembalikan respons redirect atau respons lainnya
+        // Di sini, contohnya adalah mengembalikan respons 403 Forbidden
+        return to_route('home');
     }
 }
