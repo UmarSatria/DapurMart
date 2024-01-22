@@ -48,6 +48,7 @@
         <div class="humberger__menu__widget">
             <div class="header__top__right__auth">
                 <a href="#"><i class="fa fa-user"></i> Login</a>
+
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -93,7 +94,12 @@
                             <ul>
                                 <!-- USERNAME -->
                                 <li><i class="fa fa-envelope"></i></li>
-                                <li>Free Shipping for all Order of $99</li>
+                                <li><li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit">Keluar</button>
+                                    </form>
+                                </li></li>
                             </ul>
                         </div>
                     </div>
