@@ -36,3 +36,4 @@ Route::middleware(['auth', 'role:Admin'])->group(function (){
     Route::resource('home', HomeController::class);
 });
 
+
