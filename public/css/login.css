@@ -37,7 +37,7 @@
 .text-center {
     text-align: center;
 }
-.btn-primary {
+.btn-success {
     width: 89%; /* Panjangkan tombol hingga 100% lebar kolom */
 }
 

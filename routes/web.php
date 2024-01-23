@@ -27,7 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // HOME PAGE WEB
 Route::get('/grosir', function () {
     return view('layouts.grosir');
-})->name('grosir')->middleware('verified');
+})->name('grosir');
 
 // LOGIN PAGE
 // Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLogin'])->name('login');
@@ -41,17 +41,13 @@ Route::middleware(['auth', 'role:Admin'])->group(function (){
 });
 
 
-//verifikasi email 
+//verifikasi email
 Auth::routes([
     'verify'=>true
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
-
-
-// Auth::routes([
-//     'verify'=>true
-// ]);
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('admin', function(){
+    return view('layouts.sidebar');
+});
