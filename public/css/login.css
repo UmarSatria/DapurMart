@@ -1,0 +1,43 @@
+
+.row {
+    display: flex;
+    align-items: center;
+    padding-right: 1vw;
+}
+
+.parent-container {
+    text-align: center; /* Pusatkan gambar */
+    margin-bottom: 20px; /* Tambahkan margin bawah jika diperlukan */
+}
+
+/* Sesuaikan lebar gambar sesuai kebutuhan Anda */
+.parent-container img {
+    width: 100%;
+    height: auto;
+}
+.card-header{
+    text-align: center;
+}
+.card-body{
+    align-items: left;
+    padding-right: 10vw;
+}
+.judul{
+    text-align: center;
+    padding-left: 20%;
+}
+.form-check {
+    display: flex;
+    align-items: center;
+}
+
+.col-md-6 {
+    padding: 20px; /* Sesuaikan nilai padding sesuai kebutuhan Anda */
+}
+.text-center {
+    text-align: center;
+}
+.btn-primary {
+    width: 89%; /* Panjangkan tombol hingga 100% lebar kolom */
+}
+
