@@ -18,12 +18,12 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role == 'Admin') {
-            return $next($request);
-        }
+        $userRole = Auth::user()->role;
 
-        // Jika kondisi tidak terpenuhi, Anda dapat mengembalikan respons redirect atau respons lainnya
-        // Di sini, contohnya adalah mengembalikan respons 403 Forbidden
-        return to_route('home');
+        if ($userRole == 'Admin') {
+            return $next($request);
+        } else if ($userRole == 'User') {
+            return to_route('grosir');
+        }
     }
 }

@@ -46,10 +46,10 @@
             <div class="header__cart__price"><span></span></div>
         </div>
         <div class="humberger__menu__widget">
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+            {{-- <div class="header__top__right__auth">
+                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
 
-            </div>
+            </div> --}}
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
@@ -93,13 +93,7 @@
                         <div class="header__top__left">
                             <ul>
                                 <!-- USERNAME -->
-                                <li><i class="fa fa-envelope"></i></li>
-                                <li><li>
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit">Keluar</button>
-                                    </form>
-                                </li></li>
+                                {{-- <li><i class="fa fa-envelope"></i></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -113,8 +107,39 @@
                             </div>
 
                             <div class="header__top__right__auth">
-                                {{-- LOGIN PAGE --}}
-                                <a href=""><i class="fa fa-user"></i> Login</a>
+                                <div class="d-flex">
+                                    @guest
+
+                                    @if (Route::has('login'))
+                                            <a class="mx-3"  href="{{ route('login') }}"><i class="fa fa-user"></i>{{ __('Login') }}</a>
+                                    @endif
+
+                                    @if (Route::has('register'))
+                                            <a class="" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    @endif
+
+                                    @else
+                                        <a role="button" class="mx-3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre > <i class="fa-solid fa-user"></i>
+                                            {{ Auth::user()->name }}
+                                        </a>
+
+                                            <a href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                {{ __('Logout') }}
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </div>
+                                    </li>
+                                    @endguest
+
+                                </div>
+
+
+                                {{-- <a href="{{route('login')}}"><i class="fa fa-user"></i>Login</a> --}}
                             </div>
                         </div>
                     </div>
