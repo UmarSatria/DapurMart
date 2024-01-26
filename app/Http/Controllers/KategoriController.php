@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KategoriRequest;
 use App\Models\Kategori;
+use Exception;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -12,7 +14,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        $data = Kategori::all();
+        return view('kategori', compact('data'));
     }
 
     /**
@@ -26,9 +29,10 @@ class KategoriController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(KategoriRequest $request)
     {
-        //
+        Kategori::create($request->all());
+        return to_route('kategori.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -50,16 +54,40 @@ class KategoriController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(KategoriRequest $request, $id)
     {
-        //
+        // Validasi data
+    $request->validate([
+        'kategori' => 'required',
+    ]);
+
+    // Temukan data yang akan diubah
+    $kategori = Kategori::findOrFail($id);
+
+    // Update data
+    $kategori->update([
+        'kategori' => $request->input('kategori'),
+    ]);
+
+    // Redirect atau tindakan lain setelah pembaruan
+    return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kategori $kategori)
+    public function destroy($id)
     {
-        //
+        try {
+            $data = Kategori::findOrFail($id);
+            $data->delete();
+
+            return redirect()->route('kategori.index')->with('success', 'Berhasil menghapus data.');
+
+        } catch (Exception $e) {
+            // Tangkap dan tangani eksepsi di sini
+
+            return redirect()->route('kategori.index')->with('warning', 'Gagal menghapus data karena data masih digunakan.');
+        }
     }
 }
