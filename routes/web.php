@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -56,6 +57,8 @@ Route::get('admin', function(){
 
 
 Route::resource('kategori', KategoriController::class);
-// routes/web.php
+
+Route::resource('barang', BarangController::class);
+
 
 
