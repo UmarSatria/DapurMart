@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Kategori extends Model
 {
     use HasFactory;
-
-    // Kategori.php (Model)
     protected $fillable = ['kategori'];
 
     protected $table = 'kategoris';
@@ -17,4 +15,10 @@ class Kategori extends Model
     protected $guarded = [];
     public $incrementing = true;
     public $timestamps = true;
+
+    public function barang()
+    {
+        return $this->hasMany(Barang::class);
+    }
+
 }

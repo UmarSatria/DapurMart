@@ -9,10 +9,14 @@ class Barang extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['barang'];
     protected $table = 'barangs';
     protected $primaryKey = 'id';
     protected $guarded = [];
     public $incrementing = true;
     public $timestamps = true;
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 }
