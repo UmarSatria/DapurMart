@@ -17,7 +17,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $data = Barang::all();
+        $data = Barang::paginate(1);
         $kategori =Kategori::all();
         return view('barang', compact('data', 'kategori'));
     }
