@@ -19,11 +19,10 @@ class UserAccess
     public function handle(Request $request, Closure $next): Response
     {
         $userRole = Auth::user()->role;
-
-        if ($userRole == 'Admin') {
+        if(auth()->user()->role == 'Admin'){
             return $next($request);
-        } else if ($userRole == 'User') {
-            return to_route('grosir');
+        } elseif($userRole == 'User') {
+            return to_route('grosir.index');
         }
     }
 }

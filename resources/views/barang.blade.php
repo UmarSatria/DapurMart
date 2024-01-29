@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('home')
 @section('content')
 
 <p class="text-3xl text-gray-900 dark:text-white font-medium text-gray-900 dark:text-white text-center">Daftar Produk</p>
@@ -198,6 +198,7 @@
 
         @endforeach
     </tbody>
-  </table>
+</table>
 
+{{$data->links()}}
 @endsection

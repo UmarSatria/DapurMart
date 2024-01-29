@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -24,7 +25,7 @@ Route::get('/', function () {
 });
 
 //
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 // LOGIN PAGE
@@ -33,26 +34,27 @@ Auth::routes([
     'verify'=>true
 ]);
 
-// login admin
-Route::middleware(['auth', 'role:Admin'])->group(function (){
-    Route::resource('admin', HomeController::class);
+Route::group(['middleware' => ['auth']], function(){
+    Route::resource('grosir', UserController::class)->middleware('verified');
 });
 
-// HOME PAGE WEB
-Route::get('/grosir', function () {
-    return view('layouts.grosir');
-})->name('grosir');
+// login admin
+Route::middleware(['auth', 'role:Admin'])->group(function (){
+    Route::resource('home', HomeController::class);
+});
 
-//verifikasi email
-Auth::routes([
-    'verify'=>true
-]);
+
+// HOME PAGE WEB
+// Route::get('/grosir', function () {
+//     return view('layouts.grosir');
+// })->name('grosir');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
-Route::get('admin', function(){
-    return view('layouts.sidebar');
-});
+// Route::get('admin', function(){
+//     return view('layouts.sidebar');
+// });
 
 
 

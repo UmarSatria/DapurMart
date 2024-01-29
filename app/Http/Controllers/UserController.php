@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pesan;
 use Illuminate\Http\Request;
 
-class PesanController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('layouts.grosir');
     }
 
     /**
@@ -34,7 +33,7 @@ class PesanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pesan $pesan)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class PesanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pesan $pesan)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +49,7 @@ class PesanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pesan $pesan)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +57,7 @@ class PesanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pesan $pesan)
+    public function destroy(string $id)
     {
         //
     }
