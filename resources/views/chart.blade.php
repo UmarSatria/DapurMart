@@ -10,7 +10,7 @@
     <title>Dk Grocery</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"  rel="stylesheet" />
     {{-- icon --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+
 </head>
 
 <body>
@@ -135,19 +137,19 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href=""><img src="img/img_logo.png" alt="" width="100%"
+                        <a href=""><img src="img/img_logo.png" alt="" width="58%"
                                 height="55"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="{{route('welcome.index')}}">Home</a></li>
+                            <li><a href="{{route('grosir.index')}}">Home</a></li>
                             <li><a href="{{route('shop.index')}}">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="active"><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     {{-- <li><a href="">Shop Details</a></li> --}}
-                                    <li><a href="">Shoping Cart</a></li>
+                                    <li class="active"><a href="{{route('chart.index')}}">Shoping Cart</a></li>
                                     <li><a href="">Check Out</a></li>
                                     {{-- <li><a href="">Blog Details</a></li> --}}
                                 </ul>
@@ -182,15 +184,14 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>Keranjang Saya</span>
                         </div>
                         <ul>
-                            @foreach (DB::table('kategoris')->get() as $item)
-                            <li><a href="{{ route('kategori.show', $item->id) }}">{{ $item->kategori }}</a></li>
-                            @endforeach
-
+                            <li><a href="">Total Item : </a></li>
+                            <li><a href="">Total Harga : Rp. 30.000</a></li>
                         </ul>
                     </div>
+
                 </div>
                 <div class="col-lg-9">
                     <div class="hero__search">
@@ -214,109 +215,53 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
-                        <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                                    <div class="col-lg-9">
+                    @foreach ($cart as $item)
+                        <a href="#" class="relative flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-md md:flex-row md:max-w-xl hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 transition duration-300">
+                            <img class="object-contain w-full h-48 md:h-full md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg ml-3 mt-2 mb-2" src="{{ asset('storage/'.$item->barang->gambar_produk) }}" alt="">
+                            <div class="flex flex-col justify-between p-4 flex-grow">
+                                <div>
+                                    <h5 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">{{$item->barang->nama_produk}}</h5>
+                                    <p class="mb-3 text-gray-700 dark:text-gray-400">Kategori : {{$item->barang->kategori->kategori}} </p>
+                                </div>
+                                <div class="flex justify-between items-center mt-4">
+                                    <div class="flex items-center">
+                                        <span class="text-lg font-bold text-gray-900 dark:text-white">Rp.{{$item->barang->harga_satuan}}</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        {{-- <span class="mr-2 text-gray-700 dark:text-gray-400">Qty:</span> --}}
+                                        {{-- <input type="number" class="w-16 px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring focus:border-blue-300" value="1"> --}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute top-0 right-0 m-2">
+                                <form action="{{route('chart.destroy',$item->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="barang_id" value="{{$item->id}}">
+                                    <button type="submit" class="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-500 focus:outline-none">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </a>
+                        <br>
+
+                    @endforeach
+                        <!-- Tombol Checkout -->
+                        <div class="mt-4">
+                        <a href="" class="block w-full md:max-w-xl text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Checkout</a>
                         </div>
-                    </div>
+
                 </div>
+                </div>
+
             </div>
         </div>
     </section>
     <!-- Hero Section End -->
 
 
-
-    <!-- Banner Begin -->
-    <div class="banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="img/banner/banner-1.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="img/banner/banner-2.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Banner End -->
-
-    <!-- Footer Section Begin -->
-    <footer class="footer spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <ul>
-                            <li>Address: Jalan Royal Boulevard</li>
-                            <li>Phone: +62 8102 0232 1203</li>
-                            <li>Email: dkgrocery@gmail.com</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Useful Links</h6>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text">
-                            <p></p>
-                        </div>
-                        {{-- PAYMENT --}}
-                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
