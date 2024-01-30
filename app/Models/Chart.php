@@ -5,23 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Barang extends Model
+class Chart extends Model
 {
     use HasFactory;
 
-    protected $table = 'barangs';
+    protected $table = 'charts';
     protected $primaryKey = 'id';
     protected $guarded = [];
     public $incrementing = true;
     public $timestamps = true;
 
-    public function kategori()
+    public function barang()
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(Barang::class);
     }
 
-    public function chart()
-    {
-        return $this->hasMany(Chart::class);
-    }
 }

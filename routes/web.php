@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -34,14 +37,24 @@ Auth::routes([
     'verify'=>true
 ]);
 
+Route::resource('grosir', UserController::class)->middleware('verified');
+Route::resource('welcome', Controller::class);
+
 Route::group(['middleware' => ['auth']], function(){
-    Route::resource('grosir', UserController::class)->middleware('verified');
+
+    Route::resource('shop', ShopController::class);
+    Route::resource('chart', ChartController::class);
+
 });
 
 // login admin
 Route::middleware(['auth', 'role:Admin'])->group(function (){
     Route::resource('home', HomeController::class);
 });
+
+// Route::middleware(['auth', 'role:User'])->group(function (){
+//     Route::resource('grosir', UserController::class);
+// });
 
 
 // HOME PAGE WEB
@@ -50,7 +63,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function (){
 // })->name('grosir');
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
 // Route::get('admin', function(){
 //     return view('layouts.sidebar');
@@ -61,6 +74,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('kategori', KategoriController::class);
 
 Route::resource('barang', BarangController::class);
+
+
 
 
 

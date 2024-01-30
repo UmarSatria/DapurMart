@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Chart;
+use Exception;
+use Illuminate\Http\Request;
+
+class ChartController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $cart = Chart::all();
+        return view('chart', compact('cart'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        Chart::create($request->all());
+        return redirect()->back()->with('success', 'Berhasil ditambahkan ke keranjang');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        try {
+            $cart = Chart::findOrFail($id);
+            $cart->delete();
+
+            return redirect()->route('chart.index')->with('success', 'Keranjang berhasil dihapus');
+
+        } catch (Exception $e) {
+            // Tangkap dan tangani eksepsi di sini
+
+            return redirect()->route('chart.index')->with('warning', 'Gagal menghapus data karena data masih digunakan.');
+        }
+    }
+}
