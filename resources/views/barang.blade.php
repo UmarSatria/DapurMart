@@ -1,4 +1,4 @@
-@extends('home')
+@extends('layouts.sidebar')
 @section('content')
 
 <p class="text-3xl text-gray-900 dark:text-white font-medium text-gray-900 dark:text-white text-center">Daftar Produk</p>
@@ -90,12 +90,16 @@
 
                                         </select>
                                     </div>
-                                    <div class="col-span-2">
+                                    <div class="form-floating col-span-2">
+                                        <textarea class="form-control" name="deskripsi" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" >{{$row->deskripsi}}</textarea>
+                                        <label for="floatingTextarea2">Deskripsi</label>
+                                    </div>
+                                    {{-- <div class="col-span-2">
                                         <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi Produk</label>
                                         <textarea id="" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ketik deskripsi produk di sini">
                                             {{$row->deskripsi}}
                                         </textarea>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                                 <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -138,7 +142,7 @@
                                     @csrf
                                     <div class="grid gap-4 mb-4 grid-cols-2">
                                         <div class="col-span-2" >
-                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foro Produk</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Produk</label>
                                             <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" name="gambar_produk" class="form-control @error('gambar_produk') is-invalid @enderror" value="{{$row->gambar_produk}}">
                                             @error('gambar_produk')
                                             <span class="invalid-feedback" role="alert">

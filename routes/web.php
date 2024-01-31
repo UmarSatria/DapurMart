@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -74,6 +75,9 @@ Route::middleware(['auth', 'role:Admin'])->group(function (){
 Route::resource('kategori', KategoriController::class);
 
 Route::resource('barang', BarangController::class);
+
+Route::resource('pesanan', PesananController::class);
+
 
 
 

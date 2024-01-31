@@ -38,13 +38,7 @@
         <div class="humberger__menu__logo">
             <a href="#"><img src="" alt=""></a>
         </div>
-        <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
-            </ul>
-            <div class="header__cart__price"><span></span></div>
-        </div>
+
         <div class="humberger__menu__widget">
             {{-- <div class="header__top__right__auth">
                 <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
