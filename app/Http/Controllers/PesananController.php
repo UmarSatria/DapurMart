@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
+use App\Models\Pesanan;
 use Illuminate\Http\Request;
 
-class ShopController extends Controller
+class PesananController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $shops = Barang::paginate(3);
-
-        return view('shop', compact('shops'));
-
+        //
     }
 
     /**
@@ -23,7 +20,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -31,13 +28,13 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Pesanan $pesanan)
     {
         //
     }
@@ -45,7 +42,7 @@ class ShopController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Pesanan $pesanan)
     {
         //
     }
@@ -53,7 +50,7 @@ class ShopController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Pesanan $pesanan)
     {
         //
     }
@@ -61,7 +58,7 @@ class ShopController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Pesanan $pesanan)
     {
         //
     }
