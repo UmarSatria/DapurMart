@@ -2,26 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
 use Illuminate\Http\Request;
 
-class ShopController extends Controller
+class NavbarController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $query = $request->input('search');
-
-        if ($query) {
-            $shops = Barang::where('nama_produk', 'like', '%' . $query . '%')->paginate(3);
-        } else {
-            $shops = Barang::paginate(3);
-        }
-
-        return view('shop', compact('shops', 'query'));
-
+        return view('coba');
     }
 
     /**
@@ -29,7 +19,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**

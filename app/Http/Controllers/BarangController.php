@@ -15,11 +15,26 @@ class BarangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Barang::paginate(3);
-        $kategori =Kategori::all();
-        return view('barang', compact('data', 'kategori'));
+        $search = $request->input('search');
+    $query = Barang::query();
+
+    if ($search) {
+        // Jika ada pencarian, filter data berdasarkan nama_produk
+        $query->where('nama_produk', 'like', '%' . $search . '%');
+    }
+
+    $data = $query->paginate(3);
+    $kategori = Kategori::all();
+
+    // Mendapatkan nomor halaman saat ini
+    $currentPage = $data->currentPage();
+
+    // Hitung nomor urut mulai dari 1
+    $startingNumber = ($currentPage - 1) * $data->perPage() + 1;
+
+    return view('barang', compact('data', 'kategori', 'startingNumber', 'search'));
     }
 
     /**

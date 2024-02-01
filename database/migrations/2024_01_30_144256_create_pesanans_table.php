@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('chart_id')->constrained();
+            // $table->foreignId('chart_id')->constrained();
             $table->text('alamat');
             $table->string('bukti');
             $table->string('status');

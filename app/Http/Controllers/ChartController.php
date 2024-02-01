@@ -11,8 +11,9 @@ class ChartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $cart = Chart::all();
         return view('chart', compact('cart'));
     }
