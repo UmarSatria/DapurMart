@@ -2,20 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\KategoriRequest;
 use App\Models\Kategori;
 use Exception;
-use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Kategori::paginate(3);
-        return view('kategori', compact('data'));
+        $search = $request->input('search');
+        $data = Kategori::query();
+
+        if ($search) {
+            $data->where('kategori', 'like', '%' . $search . '%');
+        }
+
+        $data = $data->paginate(10);
+
+        return view('kategori', compact('data', 'search'));
     }
 
     /**

@@ -10,7 +10,7 @@ class PesananController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
     }
@@ -28,7 +28,8 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
-        
+        Pesanan::create($request->all());
+        return redirect()->back()->with('success', 'Berhasil ditambahkan ke keranjang');
     }
 
     /**

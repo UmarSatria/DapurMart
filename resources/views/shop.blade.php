@@ -198,7 +198,21 @@
                     <div class="hero__search">
                         <div class="">
                             <div class="col-auto">
-
+                                <div class="hero__search__form">
+                                    <form action="{{ route('shop.index') }}" method="GET" class="relative">
+                                        <div class="flex items-center">
+                                            <input type="text" name="search" placeholder="What do you need?" value="{{ request('search') }}" class="site-input">
+                                            @if(request('search'))
+                                                <a href="{{ route('shop.index') }}" class="site-btn-cancel">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                    </svg>
+                                                </a>
+                                            @endif
+                                        </div>
+                                        <button type="submit" class="site-btn">SEARCH</button>
+                                    </form>
+                                </div>
                             </div>
                           </div>
                         <div class="hero__search__phone">
@@ -228,7 +242,7 @@
 
                                         </div>
                                         <div class="flex items-center justify-between">
-                                            <span class="text-2xl font-bold text-gray-900 dark:text-white">Rp.{{$item->harga_satuan}}</span>
+                                            <span class="text-2xl font-bold text-gray-900 dark:text-white">Rp.{{ number_format($item->harga_satuan, 0, ',', '.') }}</span>
                                             <form action="{{route('chart.store')}}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="barang_id" value="{{$item->id}}">

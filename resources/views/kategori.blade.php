@@ -3,10 +3,29 @@
 
 <p class="text-3xl text-gray-900 dark:text-white font-medium text-gray-900 dark:text-white text-center">Daftar Kategori</p>
 
+<div class="flex items-center justify-between mb-4">
+    <!-- Tombol Tambah dengan margin kanan 4 unit -->
+    <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="focus:outline-none text-white bg-blue-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        Tambah
+    </button>
+    <!-- Formulir Pencarian di sebelah kanan -->
+    <form action="{{ route('kategori.index') }}" method="GET" class="flex items-center justify-end">
+        <div class="relative">
+            <input type="text" name="search" class="pl-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white form-control" placeholder="Cari kategori..." value="{{ $search ?? '' }}">
+            @if(isset($search) && !empty($search))
+                <a href="{{ route('kategori.index') }}" class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-700 hover:text-gray-800 font-medium text-sm">
+                    <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M6.707 5.293a1 1 0 0 1 1.414 1.414L11 10.414l3.293-3.293a1 1 0 0 1 1.414 1.414L12.414 12l3.293 3.293a1 1 0 1 1-1.414 1.414L11 13.414l-3.293 3.293a1 1 0 0 1-1.414-1.414L9.586 12 6.293 8.707a1 1 0 0 1 0-1.414z"/>
+                    </svg>
+                </a>
+            @endif
+        </div>
+        <button type="submit" class="ml-2 text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cari</button>
+    </form>
+</div>
 
-<button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-    Tambah
-</button>
+
+
 
 <table class="table">
     <thead class="table-success">
