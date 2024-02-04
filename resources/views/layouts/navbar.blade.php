@@ -129,32 +129,28 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href=""><img src="img/img_logo.png" alt="" width="58%"height="55"></a>
+                        <a href=""><img src="img/img_logo.png" alt="" width="100%"
+                                height="55"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    {{-- class="active" --}}
-                    {{-- <nav class="header__menu">
+                    <nav class="header__menu">
                         <ul>
-                            <li ><a href="{{route('welcome.index')}}">Home</a></li>
+                            {{-- class="active" --}}
+                            <li><a href="{{route('welcome.index')}}">Home</a></li>
                             <li><a href="{{route('shop.index')}}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="">Shoping Cart</a></li>
-                                    <li><a href="">Check Out</a></li>
+                                    {{-- <li><a href="">Shop Details</a></li> --}}
+                                    <li><a href="{{route('chart.index')}}">Shoping Cart</a></li>
+                                    <li><a href="{{route('pesanan.index')}}">Check Out</a></li>
+                                    {{-- <li><a href="">Blog Details</a></li> --}}
                                 </ul>
                             </li>
                             <li><a href="">Blog</a></li>
                             <li><a href="">Contact</a></li>
                         </ul>
-                    </nav> --}}
-
-                    <div >
-                        <main class="py-4">
-                            @yield('content_1')
-                        </main>
-                    </div>
-
+                    </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
@@ -173,8 +169,10 @@
     </header>
     <!-- Header Section End -->
 
+    @yield('content')
+
     <!-- Hero Section Begin -->
-    <section class="hero">
+    {{-- <section class="hero">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -193,8 +191,7 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="hero__search">
-
-                        {{-- <div class="hero__search__form">
+                        <div class="hero__search__form">
                             <form action="#">
                                 <div class="hero__search__categories">
                                     All Categories
@@ -203,7 +200,7 @@
                                 <input type="text" placeholder="What do yo u need?">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
-                        </div> --}}
+                        </div>
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>
@@ -213,17 +210,110 @@
                                 <span>support 24/7 time</span>
                             </div>
                         </div>
-                        <div >
-                            <main class="py-4">
-                                @yield('content_2')
-                            </main>
+                    </div>
+                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+                        <div class="hero__text">
+                            <span>FRUIT FRESH</span>
+                            <h2>Vegetable <br />100% Organic</h2>
+                            <p>Free Pickup and Delivery Available</p>
+                            <a href="#" class="primary-btn">SHOP NOW</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Hero Section End -->
+
+
+
+    <!-- Banner Begin -->
+    {{-- <div class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img src="img/banner/banner-1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img src="img/banner/banner-2.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    <!-- Banner End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Address: Jalan Royal Boulevard</li>
+                            <li>Phone: +62 8102 0232 1203</li>
+                            <li>Email: dkgrocery@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Useful Links</h6>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">About Our Shop</a></li>
+                            <li><a href="#">Secure Shopping</a></li>
+                            <li><a href="#">Delivery infomation</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Our Sitemap</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Who We Are</a></li>
+                            <li><a href="#">Our Services</a></li>
+                            <li><a href="#">Projects</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Innovation</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Join Our Newsletter Now</h6>
+                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your mail">
+                            <button type="submit" class="site-btn">Subscribe</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text">
+                            <p></p>
+                        </div>
+                        {{-- PAYMENT --}}
+                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -234,6 +324,8 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+
+
 
 </body>
 

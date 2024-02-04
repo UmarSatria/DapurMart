@@ -19,4 +19,14 @@ class Pesanan extends Model
         return $this->belongsTo(Chart::class);
     }
 
+    public function pembayaran()
+    {
+        return $this->hasMany(Pembayaran::class);
+    }
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class);
+    }
+
 }
