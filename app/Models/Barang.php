@@ -24,4 +24,10 @@ class Barang extends Model
     {
         return $this->hasMany(Chart::class);
     }
+
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class);
+    }
+
 }

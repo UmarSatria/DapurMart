@@ -12,12 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pesanans', function (Blueprint $table) {
-            $table->id();
-            // $table->foreignId('chart_id')->constrained();
+            $table->foreignId('barang_id')->constrained();
+            $table->string('penerima');
             $table->text('alamat');
-            $table->string('bukti');
-            $table->string('status');
-            $table->integer('total_pembayaran');
+            $table->string('no_telp');
+            $table->integer('jumlah_pembelian');
+            $table->bigInteger('total_harga');
+            $table->enum('status', ['menunggu pembayaran','menunggu konfirmasi', 'selesai'])->default('menunggu pembayaran');
+
+            // $table->string('bukti');
+            // $table->enum('status', ['menunggu konfirmasi', 'selesai'])->default('menunggu konfirmasi');
+            // $table->unsignedInteger('total_pembayaran'); // Gunakan unsignedInteger jika total_pembayaran tidak boleh negatif.
             $table->timestamps();
         });
     }

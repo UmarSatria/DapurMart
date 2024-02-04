@@ -18,7 +18,7 @@ class BarangController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-    $query = Barang::query();
+        $query = Barang::query();
 
     if ($search) {
         // Jika ada pencarian, filter data berdasarkan nama_produk

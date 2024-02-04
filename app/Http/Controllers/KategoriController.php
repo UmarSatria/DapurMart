@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\KategoriRequest;
+use App\Models\Barang;
 use App\Models\Kategori;
 use Exception;
 
@@ -48,7 +49,8 @@ class KategoriController extends Controller
      */
     public function show(Kategori $kategori)
     {
-        //
+        $barangs = Barang::where('kategori_id', $kategori->id)->get();
+        return view('filter-kategori', compact('kategori','barangs'));
     }
 
     /**

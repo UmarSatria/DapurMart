@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FilterKategoriController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -80,6 +81,9 @@ Route::resource('barang', BarangController::class);
 Route::resource('pesanan', PesananController::class);
 
 Route::resource('coba', NavbarController::class);
+Route::resource('filter-kategori', FilterKategoriController::class);
+
+Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
 
 
 

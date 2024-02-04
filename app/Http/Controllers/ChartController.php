@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\Chart;
+use App\Models\Pesanan;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ChartController extends Controller
 {
@@ -62,18 +66,27 @@ class ChartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        try {
-            $cart = Chart::findOrFail($id);
-            $cart->delete();
+        $cart = Chart::findOrFail($id);
+        // dd($cart);
 
-            return redirect()->route('chart.index')->with('success', 'Keranjang berhasil dihapus');
-
-        } catch (Exception $e) {
-            // Tangkap dan tangani eksepsi di sini
-
-            return redirect()->route('chart.index')->with('warning', 'Gagal menghapus data karena data masih digunakan.');
+        $barang = Barang::findOrFail($cart->barang_id);
+        if ($request->jumlah_pembelian <= $barang->stok) {
+            $barang->stok -= $request->jumlah_pembelian;
+            $barang->update();
+        } else {
+            return redirect()->back()->with('warning', "Jumlah stok kurang, maksimal tersedia $barang ->stok tiket.");
         }
+
+        $carts = $request->all();
+        $carts['barang_id'] = $cart->barang_id;
+        $carts['total'] = $request->jumlah_pembelian * $cart->barang->harga_satuan;
+
+        Pesanan::create($carts);
+
+        $cart->delete();
+        return redirect()->route('pesanan.index')->with('success', 'Pemesanan Berhasil');
+
     }
 }

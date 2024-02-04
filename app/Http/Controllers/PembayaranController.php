@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pesanan;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
-class PesananController extends Controller
+class PembayaranController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $data = Pesanan::query();
-        $pesanan = Pesanan::all();
-        return view('pesanan', compact('data','pesanan'));
+        //
     }
 
     /**
@@ -30,14 +28,13 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
-        Pesanan::create($request->all());
-        return redirect()->back()->with('success', 'Berhasil ditambahkan ke keranjang');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Pesanan $pesanan)
+    public function show(Pembayaran $pembayaran)
     {
         //
     }
@@ -45,7 +42,7 @@ class PesananController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pesanan $pesanan)
+    public function edit(Pembayaran $pembayaran)
     {
         //
     }
@@ -53,7 +50,7 @@ class PesananController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pesanan $pesanan)
+    public function update(Request $request, Pembayaran $pembayaran)
     {
         //
     }
@@ -61,7 +58,7 @@ class PesananController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pesanan $pesanan)
+    public function destroy(Pembayaran $pembayaran)
     {
         //
     }
