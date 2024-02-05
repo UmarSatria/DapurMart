@@ -19,7 +19,7 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 1 12c0 .5-.5 1-1 1H6a1 1 0 0 1-1-1L6 8h12Z"/>
           </svg>
         <a href="#" class="text-green-600 hover:underline">
-            <h5 class="mb-2 text-lg font-semibold text-gray-800 dark:text-white">Total Barang <br> {{$totalbarang}}</h5>
+            <h5 class="mb-2 text-lg font-semibold text-gray-800 dark:text-white">Total Barang : {{$totalbarang}}</h5>
         </a>
         <p class="text-sm font-normal text-gray-600 dark:text-gray-300"></p>
     </div>

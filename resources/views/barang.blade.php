@@ -10,7 +10,7 @@
         Tambah
     </button>
     <!-- Formulir Pencarian di sebelah kanan -->
-    <form action="{{ route('kategori.index') }}" method="GET" class="flex items-center justify-end">
+    <form action="{{ route('barang.index') }}" method="GET" class="flex items-center justify-end">
         <div class="relative">
             <input type="text" name="search" class="pl-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white form-control" placeholder="Cari kategori..." value="{{ $search ?? '' }}">
             @if(isset($search) && !empty($search))
@@ -47,7 +47,9 @@
             <td><img src="{{ asset('storage/'.$row->gambar_produk) }}" alt="" width="80vw" height="100vw"></td>
             <td>{{$row->nama_produk}}</td>
             <td>{{$row->kategori->kategori}}</td>
-            <td>{{$row->harga_satuan}}</td>
+            <td>
+                Rp. {{ number_format($row->harga_satuan, 0,',','.')}}
+            </td>
             <td>{{$row->stok}}</td>
             <td>{{$row->deskripsi}}</td>
             <td>
