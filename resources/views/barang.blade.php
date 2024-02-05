@@ -6,7 +6,7 @@
 
 <div class="flex items-center justify-between mb-4">
     <!-- Tombol Tambah dengan margin kanan 4 unit -->
-    <button type="button" data-modal-target="tambah-modal" data-modal-toggle="tambah-modal" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+    <button type="button" data-modal-target="tambah-modal" data-modal-toggle="tambah-modal" class="focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
         Tambah
     </button>
     <!-- Formulir Pencarian di sebelah kanan -->

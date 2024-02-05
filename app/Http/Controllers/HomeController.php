@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\Pesanan;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('home');
+        $totaluser = User::where('role', 'user')->count();
+        $totalbarang = Barang::count();
+        $totalpesanan = Pesanan::count();
+
+        return view('home', compact('totaluser', 'totalbarang', 'totalpesanan'));
+
     }
 }

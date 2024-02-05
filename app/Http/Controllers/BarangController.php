@@ -94,7 +94,7 @@ class BarangController extends Controller
         }
 
         $barang->update($data);
-        return redirect()->back()->with('success', 'Berhasil update data');
+        return redirect()->back()->with('success', 'Berhasil update data');
 
     }
 

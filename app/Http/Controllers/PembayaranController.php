@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
+use App\Models\Pesanan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PembayaranController extends Controller
 {
@@ -28,7 +31,15 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pesanan = Pesanan::all();
+        $data = $request->all();
+        $bukti = $request->file('bukti');
+
+        $data['bukti'] = Str::random(20) . '.' . $bukti->getClientOriginalExtension();
+        Storage::disk('public')->put($data['bukti'], file_get_contents($bukti));
+        Pembayaran::create($data);
+        
+        return to_route('pemesanan.index');
     }
 
     /**
