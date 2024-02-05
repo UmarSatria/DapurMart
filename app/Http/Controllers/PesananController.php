@@ -66,25 +66,52 @@ class PesananController extends Controller
     public function update(Request $request, $id)
     {
         $pesanan = Pesanan::findOrFail($id);
-        $data = $request->all();
+
+    // Periksa apakah file 'bukti' diunggah
+    if ($request->hasFile('bukti')) {
         $bukti = $request->file('bukti');
         $buktiName = Str::random(20) . '.' . $bukti->getClientOriginalExtension();
+
+        // Simpan file tersebut
         Storage::disk('public')->put($buktiName, file_get_contents($bukti));
+
+        // Buat catatan Pembayaran baru
         Pembayaran::create([
             'pesanan_id' => $id,
             'bukti' => $buktiName
         ]);
-        $pesanan->update(['status' => 'selesai']);
-        return redirect()->back()->with('success', 'Berhasil dibayar');
+
+        // Perbarui status Pesanan menjadi "Menunggu Konfirmasi"
+        $pesanan->update(['status' => 'Menunggu Konfirmasi']);
+
+        // Redirect kembali dengan pesan sukses
+        return redirect()->back()->with('success', 'Bukti berhasil dikirim, silahkan tunggu konfirmasi');
     }
 
-    public function updatestatus(Request $request, $id)
+    // Jika file 'bukti' tidak diunggah, redirect kembali dengan pesan error
+    return redirect()->back()->with('error', 'Mohon unggah bukti pembayaran terlebih dahulu');
+    }
+
+    public function updateStatus(Request $request, $id)
     {
-        $pesanan = Pesanan::findOrFail($id);
-        $pesanan->update();
-        return redirect()->back()->with('success', 'Berhasil dibayar');
-    }
+        try {
+            // Temukan pesanan berdasarkan ID
+            $pesanan = Pesanan::findOrFail($id);
 
+            // Update status pesanan
+            $pesanan->update(['status' => $request->input('status')]);
+
+            // // Jika status ditolak, hapus data pembayaran terkait
+            // if ($request->input('status') == 'ditolak') {
+            //     $pesanan->pembayaran()->delete();
+            // }
+
+            return redirect()->back()->with('success', 'Status Pesanan berhasil diperbarui');
+        } catch (\Exception $e) {
+            // Handle exception jika terjadi kesalahan
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
 
     /**
      * Remove the specified resource from storage.

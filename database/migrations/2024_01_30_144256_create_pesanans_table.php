@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('no_telp');
             $table->integer('jumlah_pembelian');
             $table->bigInteger('total_harga');
-            $table->enum('status', ['menunggu pembayaran','menunggu konfirmasi', 'selesai'])->default('menunggu pembayaran');
+            $table->enum('status', ['menunggu pembayaran','menunggu konfirmasi','ditolak', 'selesai'])->default('menunggu pembayaran');
 
             // $table->string('bukti');
             // $table->enum('status', ['menunggu konfirmasi', 'selesai'])->default('menunggu konfirmasi');
