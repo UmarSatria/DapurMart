@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pesanan_id')->constrained();
-            $table->bigInteger('total_harga');
             $table->string('bukti');
-            $table->enum('status', ['menunggu pembayaran','menunggu konfirmasi', 'selesai'])->default('menunggu pembayaran');
             $table->timestamps();
         });
     }

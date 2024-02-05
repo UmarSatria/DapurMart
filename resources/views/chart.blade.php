@@ -45,10 +45,10 @@
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>
                             </div>
-                            <div class="hero__search__phone__text">
+                            {{-- <div class="hero__search__phone__text">
                                 <h5>+65 11.188.888</h5>
                                 <span>support 24/7 time</span>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -110,8 +110,8 @@
                                         @method('DELETE')
                                         <div class="grid gap-4 mb-4 grid-cols-2">
                                             <div class="col-span-2 ">
-                                                <label for="barang_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">barang_id</label>
-                                                <input type="text"  name="barang_id" id="barang_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('barang_id') is-invalid @enderror"  value="{{$item->barang->id}}" readonly >
+                                                <label for="barang_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Produk</label>
+                                                <input type="text"  name="barang_id" id="barang_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('barang_id') is-invalid @enderror"  value="{{$item->barang->nama_produk}}" readonly >
                                             </div>
                                             <div class="col-span-2 ">
                                                 <label for="penerima" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penerima</label>

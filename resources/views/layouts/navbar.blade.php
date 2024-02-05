@@ -129,7 +129,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href=""><img src="img/img_logo.png" alt="" width="100%"
+                        <a href=""><img src="img/img_logo.png" alt="" width="58%"
                                 height="55"></a>
                     </div>
                 </div>
@@ -147,8 +147,8 @@
                                     {{-- <li><a href="">Blog Details</a></li> --}}
                                 </ul>
                             </li>
-                            <li><a href="">Blog</a></li>
-                            <li><a href="">Contact</a></li>
+                            {{-- <li><a href="">Blog</a></li>
+                            <li><a href="">Contact</a></li> --}}
                         </ul>
                     </nav>
                 </div>
@@ -169,7 +169,9 @@
     </header>
     <!-- Header Section End -->
 
-    @yield('content')
+    <div>
+        @yield('content')
+    </div>
 
     <!-- Hero Section Begin -->
     {{-- <section class="hero">

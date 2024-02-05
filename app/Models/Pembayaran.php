@@ -11,7 +11,7 @@ class Pembayaran extends Model
 
     protected $guarded = ['id'];
 
-    public function pessanan()
+    public function pesanan()
     {
         return $this->belongsTo(Pesanan::class);
     }

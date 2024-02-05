@@ -7,28 +7,35 @@
 
 <div class="hero">
     <div class="container">
-        <h1>Pemesanan</h1>
+        <p class="text-4xl font-normal text-gray-900 dark:text-white text-center">Pesanan Anda</p>
+        <br>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                {{-- <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-green-400">
+                <thead class="table-success">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Product name
+                            Nama Produk
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Color
+                            Penerima
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Category
+                            Jumlah Beli
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Price
+                            Harga Satuan
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Total Harga
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+
                         </th>
                     </tr>
-                </thead> --}}
+                </thead>
                 <tbody>
                     @foreach ($pesanan as $key => $row)
 
@@ -51,15 +58,10 @@
                                 {{$row->status}}
 
                             </td>
-                        <td class="px-6 py-4">
-                            <form action="{{route('pesanan.destroy',$row->id)}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="barang_id" value="{{$row->id}}">
+                            <td class="px-6 py-4">
                                 <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                                     Bayar Sekarang
                                 </button>
-                            </form>
                             <!-- Main modal -->
                             <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative p-4 w-full max-w-md max-h-full">
@@ -78,7 +80,9 @@
                                             </button>
                                         </div>
                                         <!-- Modal body -->
-                                        <form class="p-4 md:p-5">
+                                        <form class="p-4 md:p-5" action="{{route('pesanan.update', $row->id)}}" enctype="multipart/form-data" method="post">
+                                            @csrf
+                                            @method('PUT')
                                             <div class="col-span-2" >
                                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
                                                 <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" name="bukti" class="form-control @error('bukti') is-invalid @enderror" value="{{$row->bukti}}">

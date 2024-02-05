@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
@@ -84,6 +85,7 @@ Route::resource('coba', NavbarController::class);
 Route::resource('filter-kategori', FilterKategoriController::class);
 
 Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
+Route::resource('pembayaran', PembayaranController::class);
 
 
 
