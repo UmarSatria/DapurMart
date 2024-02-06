@@ -100,10 +100,6 @@
                                         </button>
                                     </div>
 
-                                    {{-- @php
-                                        $total = $item->barang->harga_satuan * 10;
-                                    @endphp --}}
-
                                     <!-- Modal body -->
                                     <form action="{{ route('chart.destroy', $item->id) }}" method="POST" class="p-4 md:p-5" enctype="multipart/form-data">
                                         @csrf
@@ -117,7 +113,7 @@
                                                 <label for="penerima" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penerima</label>
                                                 <input type="text"  name="penerima" id="penerima" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('penerima') is-invalid @enderror"  value="{{ Auth::user()->name }}" readonly >
                                             </div>
-mm
+
                                             <div class="col-span-2">
                                                 <label for="exampleInputEmail1" class="form-label">Alamat</label>
                                                 <input type="text" name="alamat" id="alamat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white form-control @error('alamat') is-invalid @enderror"  value="{{ old('alamat') }}" placeholder="alamat" >
@@ -141,17 +137,6 @@ mm
                                                     <label for="jumlah_pembelian" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Pembelian</label>
                                                     <input type="number" name="jumlah_pembelian" id="jumlah_pembelian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="">
                                                 </div>
-
-
-                                                {{-- <div class="col-span-2" >
-                                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bukti Pembayaran</label>
-                                                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" name="bukti" class="form-control @error('bukti') is-invalid @enderror" value="{{$item->bukti}}">
-                                                    @error('bukti')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
-                                                </div> --}}
                                         </div>
                                         <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                             Submit
