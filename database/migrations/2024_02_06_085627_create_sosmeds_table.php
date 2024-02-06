@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('galleries', function (Blueprint $table) {
+        Schema::create('sosmeds', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slogan');
-            $table->string('deskripsi');
-            $table->string('image');
+            $table->string('facebook');
+            $table->string('twitter');
+            $table->string('linkedin');
+            $table->string('pinterest');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('galleries');
+        Schema::dropIfExists('sosmeds');
     }
 };
