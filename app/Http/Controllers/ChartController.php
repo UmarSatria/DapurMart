@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ChartController extends Controller
 {
@@ -37,6 +38,8 @@ class ChartController extends Controller
     {
         Chart::create($request->all());
         return redirect()->back()->with('success', 'Berhasil ditambahkan ke keranjang');
+
+
     }
 
     /**
@@ -68,6 +71,18 @@ class ChartController extends Controller
      */
     public function destroy(Request $request, string $id)
     {
+        $request->validate([
+            'alamat' => 'required|string',
+            'no_telp' => 'required|numeric',
+            'jumlah_pembelian' => 'required|min:1'
+        ],[
+            'alamat.required' => 'Alamat harus diisi.',
+            'no_telp.required' => 'Nomor telepon harus diisi.',
+            'no_telp.numeric' => 'Nomor telepon harus berupa angka.',
+            'jumlah_pembelian.required' => 'Jumlah pembelian harus diisi.',
+            'jumlah_pembelian.numeric' => 'Jumlah pembelian harus berupa angka.',
+        ]
+    );
         $cart = Chart::findOrFail($id);
         // dd($cart);
 
