@@ -12,7 +12,7 @@ class GaleriController extends Controller
      */
     public function index(Request $request)
     {
-        return view ('galeri');
+       return view('galeri');
     }
 
     /**
@@ -28,7 +28,26 @@ class GaleriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'slogan' => 'required|string',
+            'deskripsi' => 'required|string',
+        ]);
+
+        // Upload image
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+
+        // Save galeri data
+        $galeri = new Galeri();
+        $galeri->title = $request->title;
+        $galeri->image = $imageName;
+        $galeri->slogan = $request->slogan;
+        $galeri->deskripsi = $request->deskripsi;
+        $galeri->save();
+
+        return redirect()->route('galeri.index')->with('success', 'Galeri berhasil ditambahkan.');
     }
 
     /**

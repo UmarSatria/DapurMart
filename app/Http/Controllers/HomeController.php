@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Pesanan;
 use App\Models\User;
+use App\Models\Galeri;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -29,8 +30,9 @@ class HomeController extends Controller
         $totaluser = User::where('role', 'user')->count();
         $totalbarang = Barang::count();
         $totalpesanan = Pesanan::count();
+        $gallery = Galeri::all();
 
-        return view('home', compact('totaluser', 'totalbarang', 'totalpesanan'));
+        return view('home', compact('totaluser', 'totalbarang', 'totalpesanan', 'gallery'));
 
     }
 }

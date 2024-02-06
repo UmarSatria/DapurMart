@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Galeri;
 
 class UserController extends Controller
 {
@@ -11,6 +12,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $gallery = Galeri::all();
         return view('layouts.grosir');
     }
 

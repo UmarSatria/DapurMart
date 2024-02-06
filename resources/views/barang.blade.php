@@ -95,19 +95,17 @@
                                         @csrf
                                         <div class="grid gap-4 mb-4 grid-cols-2">
                                             <div class="col-span-2">
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foro
-                                                    Produk</label>
-                                                <input
-                                                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                                    id="file_input" type="file" name="gambar_produk"
-                                                    class="form-control @error('gambar_produk') is-invalid @enderror"
-                                                    value="{{ $row->gambar_produk }}">
+                                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Produk</label>
+                                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                                    id="file_input" type="file" name="gambar_produk">
                                                 @error('gambar_produk')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
+                                                @if ($row->gambar_produk)
+                                                    <img src="{{ asset('storage/' . $row->gambar_produk) }}" alt="Produk" width="200px" height="200px">
+                                                @endif
                                             </div>
                                             <div class="col-span-2">
                                                 <label for="nama_produk"
@@ -227,12 +225,14 @@
                                                     <input
                                                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                                         id="file_input" type="file" name="gambar_produk"
-                                                        class="form-control" value="{{ $row->gambar_produk }}">
+                                                        class="form-control" onchange="previewImage(this)">
                                                     @error('gambar_produk')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+                                                    <img id="preview_image" class="mt-2"
+                                                        style="max-width: 150pxx; display: none;" alt="Preview Gambar">
                                                 </div>
                                                 <div class="col-span-2">
                                                     <label for="nama_produk"
@@ -252,7 +252,8 @@
                                                         Satuan</label>
                                                     <input type="number" name="harga_satuan" id="harga_satuan"
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500form-control"
-                                                        placeholder="Harga Satuan" value="{{ old('harga_satuan') }}" min="0">
+                                                        placeholder="Harga Satuan" value="{{ old('harga_satuan') }}"
+                                                        min="0">
                                                     @error('harga_satuan')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -305,22 +306,41 @@
                                                     @enderror
                                                 </div>
 
+                                            </div>
+                                            <button type="submit"
+                                                class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                                Tambahkan Data
+                                            </button>
+                                        </form>
                                     </div>
-                                    <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                        Tambahkan Data
-                                    </button>
-                                </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function(e) {
+                    document.getElementById('preview_image').src = e.target.result;
+                    document.getElementById('preview_image').style.display = 'block';
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
     {{ $data->links() }}
 @endsection
