@@ -90,11 +90,3 @@ Route::resource('pembayaran', PembayaranController::class);
 Route::get('pesanan/{id}/edit-status', 'PesananController@editStatus')->name('pesanan.editStatus');
 // Route::put('pesanan/{id}/update-status', 'PesananController@updateStatus')->name('update_status');
 Route::put('pesanan/{id}/update-status', [PesananController::class, 'updateStatus'])->name('update_status');
-
-
-
-
-
-
-
-

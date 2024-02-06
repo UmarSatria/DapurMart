@@ -50,8 +50,14 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        // Barang::create($request->all());
-        // return to_route('barang.index')->with('success', 'Data berhasil ditambahkan');
+        $request->validate([
+            'gambar_produk' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'nama_produk' => 'required',
+            'harga_satuan' => 'required|min:0',
+            'stok' => 'required|min:0',
+            'deskripsi' => 'required',
+            'kategori_id' => 'required',
+        ]);
 
         $data = $request->all();
         $gambar = $request->file('gambar_produk');
@@ -59,8 +65,9 @@ class BarangController extends Controller
         Storage::disk('public')->put($data['gambar_produk'], file_get_contents($gambar));
         Barang::create($data);
 
-        return to_route('barang.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('barang.index')->with('success', 'Data berhasil ditambahkan');
     }
+
 
     /**
      * Display the specified resource.
@@ -82,21 +89,29 @@ class BarangController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Barang $barang)
-    {
-        $data = $request->all();
-        if ($request->hasFile('gambar_produk')) {
-            $gambar_produk = $request->file('gambar_produk');
-            $data['gambar_produk'] = Str::random(20) . '.' . $gambar_produk->getClientOriginalExtension();
-            Storage::disk('public')->put($data['gambar_produk'], file_get_contents($gambar_produk));
-            Storage::disk('public')->delete($barang->gambar_produk);
-        } else {
-            $data['gambar_produk'] = $barang->gambar_produk;
-        }
+{
+    $request->validate([
+        'gambar_produk' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'nama_produk' => 'required',
+        'harga_satuan' => 'required|min:0',
+        'stok' => 'required|min:0',
+        'deskripsi' => 'required',
+    ]);
 
-        $barang->update($data);
-        return redirect()->back()->with('success', 'Berhasil update data');
-
+    $data = $request->all();
+    if ($request->hasFile('gambar_produk')) {
+        $gambar_produk = $request->file('gambar_produk');
+        $data['gambar_produk'] = Str::random(20) . '.' . $gambar_produk->getClientOriginalExtension();
+        Storage::disk('public')->put($data['gambar_produk'], file_get_contents($gambar_produk));
+        Storage::disk('public')->delete($barang->gambar_produk);
+    } else {
+        $data['gambar_produk'] = $barang->gambar_produk;
     }
+
+    $barang->update($data);
+    return redirect()->back()->with('success', 'Berhasil update data');
+}
+
 
 
     /**
