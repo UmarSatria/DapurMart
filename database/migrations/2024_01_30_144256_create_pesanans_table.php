@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pesanans', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('barang_id')->constrained();
             $table->string('penerima');
             $table->text('alamat');
             $table->string('no_telp');
             $table->integer('jumlah_pembelian');
-            $table->bigInteger('total_harga');
+            $table->bigInteger('total');
             $table->enum('status', ['menunggu pembayaran','menunggu konfirmasi','ditolak', 'selesai'])->default('menunggu pembayaran');
 
             // $table->string('bukti');

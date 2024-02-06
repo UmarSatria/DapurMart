@@ -9,7 +9,11 @@ class Pembayaran extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $table = 'pembayarans';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
+    public $incrementing = true;
+    public $timestamps = true;
 
     public function pesanan()
     {

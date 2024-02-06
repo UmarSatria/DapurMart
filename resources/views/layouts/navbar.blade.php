@@ -136,22 +136,22 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            {{-- class="active" --}}
-                            <li><a href="{{route('welcome.index')}}">Home</a></li>
-                            <li><a href="{{route('shop.index')}}">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    {{-- <li><a href="">Shop Details</a></li> --}}
-                                    <li><a href="{{route('chart.index')}}">Shoping Cart</a></li>
-                                    <li><a href="{{route('pesanan.index')}}">Check Out</a></li>
-                                    {{-- <li><a href="">Blog Details</a></li> --}}
-                                </ul>
+                            <li class="{{ request()->routeIs('welcome.index') ? 'active' : '' }}">
+                                <a href="{{ route('welcome.index') }}">Home</a>
                             </li>
-                            {{-- <li><a href="">Blog</a></li>
-                            <li><a href="">Contact</a></li> --}}
+                            <li class="{{ request()->routeIs('shop.index') ? 'active' : '' }}">
+                                <a href="{{ route('shop.index') }}">Shop</a>
+                            </li>
+                            <li class="{{ request()->routeIs('chart.index') ? 'active' : '' }}">
+                                <a href="{{ route('chart.index') }}">Cart</a>
+                            </li>
+                            <li class="{{ request()->routeIs('pesanan.index') ? 'active' : '' }}">
+                                <a href="{{ route('pesanan.index') }}">Check Out</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
+
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>

@@ -91,7 +91,7 @@ class ChartController extends Controller
             $barang->stok -= $request->jumlah_pembelian;
             $barang->update();
         } else {
-            return redirect()->back()->with('warning', "Jumlah stok kurang, maksimal tersedia $barang ->stok tiket.");
+            return redirect()->back()->with('warning', "Jumlah stok kurang, maksimal tersedia $barang ->stok barang.");
         }
 
         $carts = $request->all();

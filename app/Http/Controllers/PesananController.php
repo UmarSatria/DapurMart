@@ -94,23 +94,15 @@ class PesananController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        try {
-            // Temukan pesanan berdasarkan ID
-            $pesanan = Pesanan::findOrFail($id);
+        $buktiPembayaran = $request->file('bukti');
+        $status = $buktiPembayaran ? 'menunggu konfirmasi' : 'bayar sekarang';
 
-            // Update status pesanan
-            $pesanan->update(['status' => $request->input('status')]);
+        // Setelah berhasil, perbarui status
+        $pesanan = Pesanan::find($id);
+        $pesanan->status = $status;
+        $pesanan->save();
 
-            // // Jika status ditolak, hapus data pembayaran terkait
-            // if ($request->input('status') == 'ditolak') {
-            //     $pesanan->pembayaran()->delete();
-            // }
-
-            return redirect()->back()->with('success', 'Status Pesanan berhasil diperbarui');
-        } catch (\Exception $e) {
-            // Handle exception jika terjadi kesalahan
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
+        return response()->json(['success' => true]);
     }
 
     /**
