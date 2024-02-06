@@ -10,9 +10,9 @@ class GaleriController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return view ('galeri');
     }
 
     /**

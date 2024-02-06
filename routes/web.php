@@ -4,6 +4,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FilterKategoriController;
+use App\Http\Controllers\GaleriController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SosmedController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -54,6 +56,12 @@ Route::group(['middleware' => ['auth']], function(){
 // login admin
 Route::middleware(['auth', 'role:Admin'])->group(function (){
     Route::resource('home', HomeController::class);
+    Route::resource('sosmed', SosmedController::class);
+    Route::resource('kategori', KategoriController::class);
+    Route::resource('barang', BarangController::class);
+    Route::resource('galeri', GaleriController::class);
+
+
 });
 
 // Route::middleware(['auth', 'role:User'])->group(function (){
@@ -75,9 +83,6 @@ Route::middleware(['auth', 'role:Admin'])->group(function (){
 
 
 
-Route::resource('kategori', KategoriController::class);
-
-Route::resource('barang', BarangController::class);
 
 Route::resource('pesanan', PesananController::class);
 
@@ -88,5 +93,5 @@ Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('ka
 Route::resource('pembayaran', PembayaranController::class);
 
 Route::get('pesanan/{id}/edit-status', 'PesananController@editStatus')->name('pesanan.editStatus');
-// Route::put('pesanan/{id}/update-status', 'PesananController@updateStatus')->name('update_status');
 Route::put('pesanan/{id}/update-status', [PesananController::class, 'updateStatus'])->name('update_status');
+

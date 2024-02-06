@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Sosmed extends Model
 {
     use HasFactory;
+    protected $table = 'sosmeds';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
+    public $incrementing = true;
+    public $timestamps = true;
 }
