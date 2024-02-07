@@ -41,6 +41,7 @@
                             </div>
                         </div>
                     </div>
+                    @foreach ( $galleries as $gallery)
                     <div class="hero__item set-bg" data-setbg="{{ asset($gallery->image) }}">
                         <div class="hero__text">
                             <span>{{ $gallery->title }}</span>
@@ -49,6 +50,7 @@
                             <a href="#" class="primary-btn">SHOP NOW</a>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>

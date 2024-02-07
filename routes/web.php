@@ -59,6 +59,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function (){
     Route::resource('sosmed', SosmedController::class);
     Route::resource('kategori', KategoriController::class);
     Route::resource('barang', BarangController::class);
+    Route::get('galeri/create', [GaleriController::class, 'create'])->name('galeri.create');
     Route::get('galeri', [GaleriController::class, 'index'])->name('galeri.index');
     Route::post('galeri', [GaleriController::class, 'store'])->name('galeri.store');
 });

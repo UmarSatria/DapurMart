@@ -12,8 +12,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $gallery = Galeri::all();
-        return view('layouts.grosir');
+        $galleries = Galeri::all();
+        return view('layouts.grosir', compact('galleries'));
     }
 
     /**

@@ -12,7 +12,8 @@ class GaleriController extends Controller
      */
     public function index(Request $request)
     {
-       return view('galeri');
+       $galleries = Galeri::all();
+       return view('galeri', compact('galleries'));
     }
 
     /**
@@ -20,7 +21,7 @@ class GaleriController extends Controller
      */
     public function create()
     {
-        //
+        return view('galeri.create');
     }
 
     /**

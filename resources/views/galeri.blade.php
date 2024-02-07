@@ -10,7 +10,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Create New Product
+                        Tambahkan Galeri
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -61,7 +61,7 @@
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        Add new product
+                        Tambahkan
                     </button>
                 </form>
 
@@ -82,4 +82,22 @@
             </button>
         </div>
     </div>
+   <div class="container mx-auto px-4">
+    <div class="flex justify-center space-x-4">
+        @foreach ($galleries as $gallery)
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="flex justify-center items-center h-48">
+                    <img src="{{ asset('images/' . $gallery->image) }}" class="card-img-top"
+                        alt="{{ $gallery->title }}">
+                </div>
+                <div class="p-5">
+                    <h5 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">{{ $gallery->title }}</h5>
+                    <p class="mb-3 text-gray-700 dark:text-gray-400">{{ $gallery->slogan }}</p>
+                    <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
 @endsection
