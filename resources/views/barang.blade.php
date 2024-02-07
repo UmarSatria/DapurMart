@@ -16,7 +16,7 @@
                     class="pl-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white form-control"
                     placeholder="Cari kategori..." value="{{ $search ?? '' }}">
                 @if (isset($search) && !empty($search))
-                    <a href="{{ route('kategori.index') }}"
+                    <a href="{{ route('barang.index') }}"
                         class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-700 hover:text-gray-800 font-medium text-sm">
                         <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                             fill="currentColor">
@@ -96,6 +96,10 @@
                                         <div class="grid gap-4 mb-4 grid-cols-2">
                                             <div class="col-span-2">
                                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Produk</label>
+                                                @if ($row->gambar_produk)
+                                                    <img src="{{ asset('storage/' . $row->gambar_produk) }}" alt="Produk" width="200px" height="200px">
+                                                @endif
+                                                <br>
                                                 <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                                     id="file_input" type="file" name="gambar_produk">
                                                 @error('gambar_produk')
@@ -103,17 +107,14 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-                                                @if ($row->gambar_produk)
-                                                    <img src="{{ asset('storage/' . $row->gambar_produk) }}" alt="Produk" width="200px" height="200px">
-                                                @endif
                                             </div>
                                             <div class="col-span-2">
-                                                <label for="nama_produk"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                                                <label for="nama_produk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    Nama
+                                                </label>
                                                 <input type="text" name="nama_produk" id="nama_produk"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 form-control @error('nama_produk') is-invalid @enderror"
-                                                    placeholder="Nama Produk" required=""
-                                                    value="{{ $row->nama_produk }}">
+                                                    placeholder="Nama Produk" required="" value="{{ $row->nama_produk }}">
                                                 @error('nama_produk')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -121,22 +122,25 @@
                                                 @enderror
                                             </div>
                                             <div class="col-span-2 sm:col-span-1">
-                                                <label for="harga_satuan"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga
-                                                    Satuan</label>
+                                                <label for="harga_satuan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Satuan</label>
                                                 <input type="number" name="harga_satuan" id="harga_satuan"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500form-control @error('nama_produk') is-invalid @enderror"
-                                                    placeholder="Harga Satuan" required=""
-                                                    value="{{ $row->harga_satuan }}">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500form-control @error('harga_satuan') is-invalid @enderror"
+                                                    placeholder="Harga Satuan"  value="{{ $row->harga_satuan }}">
+                                                @error('harga_satuan')
+                                                    <span class="text-red-500">{{ $message }}</span>
+                                                @enderror
                                             </div>
+
                                             <div class="col-span-2 sm:col-span-1">
-                                                <label for="harga_satuan"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stok</label>
+                                                <label for="stok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stok</label>
                                                 <input type="number" name="stok" id="stok"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500form-control @error('stok') is-invalid @enderror"
-                                                    placeholder="Harga Satuan" required=""
-                                                    value="{{ $row->stok }}">
+                                                    placeholder="Stok" value="{{ $row->stok }}">
+                                                @error('stok')
+                                                    <span class="text-red-500">{{ $message }}</span>
+                                                @enderror
                                             </div>
+
                                             <div class="col-span-2">
                                                 <label for="kategori"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
@@ -178,7 +182,6 @@
                             </div>
                         </div>
 
-
                         <form action="{{ route('barang.destroy', $row->id) }}" method="POST"
                             onclick="return confirm('Apa anda yakin ingin menghapus data ini?')">
                             @csrf
@@ -219,57 +222,46 @@
                                             @csrf
                                             <div class="grid gap-4 mb-4 grid-cols-2">
                                                 <div class="col-span-2">
-                                                    <label
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto
-                                                        Produk</label>
+                                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Produk</label>
+                                                    <img id="preview_image" class="mt-2" style="max-width: 150px; display: none;" alt="Preview Gambar"> <br>
                                                     <input
                                                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                                        id="file_input" type="file" name="gambar_produk"
-                                                        class="form-control" onchange="previewImage(this)">
+                                                        id="file_input" type="file" name="gambar_produk" onchange="previewImage(this)">
                                                     @error('gambar_produk')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <img id="preview_image" class="mt-2"
-                                                        style="max-width: 150pxx; display: none;" alt="Preview Gambar">
                                                 </div>
+
                                                 <div class="col-span-2">
                                                     <label for="nama_produk"
                                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
                                                     <input type="text" name="nama_produk" id="nama_produk"
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 form-control"
                                                         placeholder="Nama Produk" value="{{ old('nama_produk') }}">
-                                                    @error('nama_produk')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                        @error('nama_produk')
+                                                        <div class="text-red-500">{{ $message }}</div>
+                                                        @enderror
                                                 </div>
                                                 <div class="col-span-2 sm:col-span-1">
                                                     <label for="harga_satuan"
                                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga
                                                         Satuan</label>
-                                                    <input type="number" name="harga_satuan" id="harga_satuan"
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500form-control"
-                                                        placeholder="Harga Satuan" value="{{ old('harga_satuan') }}"
-                                                        min="0">
-                                                    @error('harga_satuan')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                        <input type="text" name="harga_satuan" id="harga_satuan"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 form-control"
+                                                        placeholder="Nama Produk" value="{{ old('harga_satuan') }}">
+                                                        @error('harga_satuan')
+                                                        <div class="text-red-500">{{ $message }}</div>
+                                                        @enderror
                                                 </div>
                                                 <div class="col-span-2 sm:col-span-1">
-                                                    <label for="stok"
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stok</label>
+                                                    <label for="stok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stok</label>
                                                     <input type="number" name="stok" id="stok"
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500form-control"
-                                                        placeholder="stok" value="{{ old('stok') }}" min="0">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 form-control @error('stok') is-invalid @enderror"
+                                                    placeholder="Stok" value="{{ old('stok') }}">
                                                     @error('stok')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
+                                                        <span class="text-red-500">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="col-span-2">

@@ -22,7 +22,7 @@ class KategoriController extends Controller
             $data->where('kategori', 'like', '%' . $search . '%');
         }
 
-        $data = $data->paginate(10);
+        $data = $data->paginate(3);
 
         return view('kategori', compact('data', 'search'));
     }

@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\Pesanan;
 use App\Models\User;
 use App\Models\Galeri;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -31,8 +32,10 @@ class HomeController extends Controller
         $totalbarang = Barang::count();
         $totalpesanan = Pesanan::count();
         $gallery = Galeri::all();
+        $totalbayar = Pembayaran::count();
 
-        return view('home', compact('totaluser', 'totalbarang', 'totalpesanan', 'gallery'));
+
+        return view('home', compact('totaluser', 'totalbarang', 'totalpesanan', 'gallery','totalbayar'));
 
     }
 }

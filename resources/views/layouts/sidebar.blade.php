@@ -69,9 +69,6 @@
                             </div>
                             <ul class="py-1" role="none">
                                 <li>
-                                    {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a> --}}
-                                </li>
-                                <li>
                                     <a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();"
@@ -175,23 +172,6 @@
                         </svg>
                         <span class="flex-1 ms-3 whitespace-nowrap">Sosial Media</span>
                     </a>
-                </li>
-                {{-- <li>
-                  <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M3.6 4.5c.3-.3.8-.5 1.3-.5H19a1.9 1.9 0 0 1 2 1.9V15a1.9 1.9 0 0 1-1.9 1.9h-3.6l-2.7 3.6a1 1 0 0 1-1.6 0L8.5 17H4.9A1.9 1.9 0 0 1 3 15.1V6c0-.5.2-1 .6-1.4Zm4 3a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2h-8Zm0 3.5a1 1 0 1 0 0 2H12a1 1 0 1 0 0-2H7.6Z" clip-rule="evenodd"/>
-                      </svg>
-
-                     <span class="flex-1 ms-3 whitespace-nowrap">Komentar</span>
-                  </a>
-               </li> --}}
-                <li>
-                    {{-- <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm11-4a1 1 0 1 0-2 0v4c0 .3.1.5.3.7l3 3a1 1 0 0 0 1.4-1.4L13 11.6V8Z" clip-rule="evenodd"/>
-                      </svg>
-                     <span class="flex-1 ms-3 whitespace-nowrap">Histori</span>
-                </a> --}}
                 </li>
             </ul>
         </div>

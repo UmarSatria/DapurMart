@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css">
 @endpush
 
-@extends('layouts.navbar')
+@extends('layouts.filter-navbar')
 
 @section('content')
 

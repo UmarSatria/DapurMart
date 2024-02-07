@@ -53,7 +53,7 @@
                                 Rp. {{ number_format($row->barang->harga_satuan, 0,',','.')}}
                             </td>
                             <td class="px-6 py-4">
-                                tota: Rp. {{ number_format($row->total, 0,',','.')}}
+                                total: Rp. {{ number_format($row->total, 0,',','.')}}
                             </td>
 
                             <td class="px-6 py-4 text-center">

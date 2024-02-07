@@ -70,15 +70,6 @@
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            {{-- <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
-                            </div> --}}
-                        </div>
                     </div>
                     <div class="col-lg-9">
                         @foreach ($cart as $item)
@@ -180,32 +171,27 @@
                                                 </div>
 
 
-                                                <div class="col-span-2 ">
-                                                    <label for="no_telp"
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No
-                                                        Telepon</label>
-                                                    <input type="number" value="" name="no_telp" id="no_telp"
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('no_telp') is-invalid @enderror"
-                                                        value="{{ old('no_telp') }}" placeholder="no telp">
-                                                    @error('no_telp')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
                                                 <div class="col-span-2">
-                                                    <label for="jumlah_pembelian"
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah
-                                                        Pembelian</label>
-                                                    <input type="number" name="jumlah_pembelian" id="jumlah_pembelian"
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                        placeholder="Jumlah pembelian" min="0">
-                                                    @error('jumlah_pembelian')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
+                                                    <label for="no_telp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No Telepon</label>
+                                                    <input type="text" name="no_telp" id="no_telp"
+                                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('no_telp') is-invalid @enderror"
+                                                           value="{{ old('no_telp') }}" placeholder="No Telepon">
+                                                    @error('no_telp')
+                                                        <span class="text-red-500">{{ $message }}</span>
                                                     @enderror
                                                 </div>
+
+                                                <div class="col-span-2 sm:col-span-1">
+                                                    <label for="jumlah_pembelian" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">jumlah_pembelian</label>
+                                                    <input type="number" name="jumlah_pembelian" id="jumlah_pembelian"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500form-control @error('jumlah_pembelian') is-invalid @enderror"
+                                                        placeholder="jumlah_pembelian" value="{{ $item->jumlah_pembelian }}">
+                                                    @error('jumlah_pembelian')
+                                                        <span class="text-red-500">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+
                                             </div>
                                             <button type="submit"
                                                 class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -222,7 +208,6 @@
                             type="button">
                             Checkout
                         </button>
-                        <!-- Main modal -->
                     </div>
                 </div>
 

@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\Kategori;
 use Exception;
 use Illuminate\Contracts\Cache\Store;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -50,22 +51,35 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'gambar_produk' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'nama_produk' => 'required',
-            'harga_satuan' => 'required|min:0',
-            'stok' => 'required|min:0',
-            'deskripsi' => 'required',
-            'kategori_id' => 'required',
-        ]);
+        try {
+            $request->validate([
+                'gambar_produk' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'nama_produk' => 'required',
+                'harga_satuan' => 'required|numeric|min:1',
+                'stok' => 'required|numeric|min:1',
+                'deskripsi' => 'required',
+            ], [
+                'gambar_produk.required' => 'Data harus diisi',
+                'nama_produk.required' => 'Data harus diisi',
+                'harga_satuan.required' => 'Data harus diisi',
+                'harga_satuan.numeric' => 'Data harus berupa angka',
+                'harga_satuan.min' => 'Data tidak boleh kurang dari 1',
+                'stok.required' => 'Data harus diisi',
+                'stok.numeric' => 'Data harus berupa angka',
+                'stok.min' => 'Data tidak boleh kurang dari 1',
+                'deskripsi.required' => 'Data harus diisi',
+            ]);
 
-        $data = $request->all();
-        $gambar = $request->file('gambar_produk');
-        $data['gambar_produk'] = Str::random(20) . '.' . $gambar->getClientOriginalExtension();
-        Storage::disk('public')->put($data['gambar_produk'], file_get_contents($gambar));
-        Barang::create($data);
+            $data = $request->all();
+            $gambar = $request->file('gambar_produk');
+            $data['gambar_produk'] = Str::random(20) . '.' . $gambar->getClientOriginalExtension();
+            Storage::disk('public')->put($data['gambar_produk'], file_get_contents($gambar));
+            Barang::create($data);
 
-        return redirect()->route('barang.index')->with('success', 'Data berhasil ditambahkan');
+            return redirect()->route('barang.index')->with('success', 'Data berhasil ditambahkan');
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', 'Gagal menambahkan data. Silakan coba lagi.');
+        }
     }
 
 
@@ -93,9 +107,19 @@ class BarangController extends Controller
     $request->validate([
         'gambar_produk' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'nama_produk' => 'required',
-        'harga_satuan' => 'required|min:0',
-        'stok' => 'required|min:0',
+        'harga_satuan' => 'required|numeric|min:1',
+        'stok' => 'required|numeric|min:1',
         'deskripsi' => 'required',
+    ], [
+        'gambar_produk.required' => 'Data harus diisi',
+        'nama_produk.required' => 'Data harus diisi',
+        'harga_satuan.required' => 'Data harus diisi',
+        'harga_satuan.numeric' => 'Data harus berupa angka',
+        'harga_satuan.min' => 'Data tidak boleh kurang dari 1',
+        'stok.required' => 'Data harus diisi',
+        'stok.numeric' => 'Data harus berupa angka',
+        'stok.min' => 'Data tidak boleh kurang dari 1',
+        'deskripsi.required' => 'Data harus diisi',
     ]);
 
     $data = $request->all();

@@ -74,15 +74,16 @@ class ChartController extends Controller
         $request->validate([
             'alamat' => 'required|string',
             'no_telp' => 'required|numeric',
-            'jumlah_pembelian' => 'required|min:1'
-        ],[
+            'jumlah_pembelian' => 'required|numeric|min:1', // Pastikan aturan min:1 diakhiri dengan koma
+        ], [
             'alamat.required' => 'Alamat harus diisi.',
             'no_telp.required' => 'Nomor telepon harus diisi.',
             'no_telp.numeric' => 'Nomor telepon harus berupa angka.',
-            'jumlah_pembelian.required' => 'Jumlah pembelian harus diisi.',
-            'jumlah_pembelian.numeric' => 'Jumlah pembelian harus berupa angka.',
-        ]
-    );
+            'jumlah_pembelian.required' => 'Data harus diisi',
+            'jumlah_pembelian.numeric' => 'Data harus berupa angka',
+            'jumlah_pembelian.min' => 'Data tidak boleh kurang dari 1',
+        ]);
+
         $cart = Chart::findOrFail($id);
         // dd($cart);
 
