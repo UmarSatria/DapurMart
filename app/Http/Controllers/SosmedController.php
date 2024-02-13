@@ -12,7 +12,8 @@ class SosmedController extends Controller
      */
     public function index(Request $request)
     {
-        return view ('sosmed');
+        $sosmed = Sosmed::all();
+        return view ('sosmed', compact('sosmed'));
     }
 
     /**
@@ -28,7 +29,24 @@ class SosmedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'facebook' => 'required|string',
+            'twitter' => 'required|string',
+            'linkedin' => 'required|string',
+            'pinterest' => 'required|string',
+            'telepon' => 'required',
+        ]);
+
+        Sosmed::create([
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'linkedin' => $request->linkedin,
+            'pinterest' => $request->pinterest,
+            'telepon' => $request->telepon,
+        ]);
+
+        return redirect()->back()->with('success', 'Data social media baru berhasil ditambahkan.');
+
     }
 
     /**
@@ -52,7 +70,23 @@ class SosmedController extends Controller
      */
     public function update(Request $request, Sosmed $sosmed)
     {
-        //
+        $request->validate([
+            'facebook' => 'required|string',
+            'twitter' => 'required|string',
+            'linkedin' => 'required|string',
+            'pinterest' => 'required|string',
+            'telepon' => 'required',
+        ]);
+
+        $sosmed->update([
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'linkedin' => $request->linkedin,
+            'pinterest' => $request->pinterest,
+            'telepon' => $request->telepon,
+        ]);
+
+        return redirect()->back()->with('success', 'Data social media berhasil diperbarui.');
     }
 
     /**
@@ -60,6 +94,7 @@ class SosmedController extends Controller
      */
     public function destroy(Sosmed $sosmed)
     {
-        //
+        $sosmed->delete();
+        return redirect()->back()->with('success', 'Data social media berhasil dihapus.');
     }
 }

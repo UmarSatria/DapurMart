@@ -1,6 +1,5 @@
 @extends('layouts.navbar')
 @section('content')
-
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="container">
@@ -13,7 +12,7 @@
                         </div>
                         <ul>
                             @foreach (DB::table('kategoris')->get() as $item)
-                            <li><a href="{{ route('kategori.show', $item->id) }}">{{ $item->kategori }}</a></li>
+                                <li><a href="{{ route('kategori.show', $item->id) }}">{{ $item->kategori }}</a></li>
                             @endforeach
 
                         </ul>
@@ -36,21 +35,22 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
+                                @foreach ($sosmed as $sosm)
+                                <h5>+{{$sosm->telepon}}</h5>
+                                @endforeach
                                 <span>support 24/7 time</span>
                             </div>
                         </div>
                     </div>
-                    @foreach ( $galleries as $gallery)
-                    <div class="hero__item set-bg" data-setbg="{{ asset($gallery->image) }}">
-                        <div class="hero__text">
-                            <span>{{ $gallery->title }}</span>
-                            <h2>{{ $gallery->slogan }}</h2>
-                            <p>{{ $gallery->deskripsi }}</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                        <div class="hero__item set-bg" data-setbg="{{ asset($galleries->image) }}">
+                            <div class="hero__text">
+                                <img src="{{ asset($galleries->image) }}" alt="" width="100%">
+                                <span>{{ $galleries->title }}</span>
+                                <h2>{{ $galleries->slogan }}</h2>
+                                <p>{{ $galleries->deskripsi }}</p>
+                                <a href="" class="primary-btn">SHOP NOW</a>
+                            </div>
                         </div>
-                    </div>
-                    @endforeach
                 </div>
             </div>
         </div>
@@ -77,5 +77,4 @@
         </div>
     </div>
     <!-- Banner End -->
-
 @endsection

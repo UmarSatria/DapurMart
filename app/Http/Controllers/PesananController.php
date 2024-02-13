@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
 use App\Models\Pesanan;
+use App\Models\Sosmed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -15,15 +16,15 @@ class PesananController extends Controller
      */
     public function index(Request $request)
     {
+        $sosmed = Sosmed::all();
         $data = Pesanan::query();
         $pesanan = Pesanan::all();
         $pembayaran = Pembayaran::all();
 
-
         if (auth()->user()->role == 'Admin') {
             return view('pesanan_admin', compact('data', 'pesanan','pembayaran'));
         } else {
-            return view('pesanan', compact('data', 'pesanan','pembayaran'));
+            return view('pesanan', compact('data', 'pesanan','pembayaran', 'sosmed'));
         }
     }
 

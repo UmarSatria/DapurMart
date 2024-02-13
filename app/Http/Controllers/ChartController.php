@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Chart;
 use App\Models\Pesanan;
+use App\Models\Sosmed;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -20,7 +21,8 @@ class ChartController extends Controller
     {
 
         $cart = Chart::all();
-        return view('chart', compact('cart'));
+        $sosmed = Sosmed::all();
+        return view('chart', compact('cart', 'sosmed'));
     }
 
     /**
@@ -74,7 +76,7 @@ class ChartController extends Controller
         $request->validate([
             'alamat' => 'required|string',
             'no_telp' => 'required|numeric',
-            'jumlah_pembelian' => 'required|numeric|min:1', // Pastikan aturan min:1 diakhiri dengan koma
+            'jumlah_pembelian' => 'required|numeric|min:1',
         ], [
             'alamat.required' => 'Alamat harus diisi.',
             'no_telp.required' => 'Nomor telepon harus diisi.',
@@ -92,7 +94,7 @@ class ChartController extends Controller
             $barang->stok -= $request->jumlah_pembelian;
             $barang->update();
         } else {
-            return redirect()->back()->with('warning', "Jumlah stok kurang, maksimal tersedia $barang ->stok barang.");
+            return redirect()->back()->with('warning', "Jumlah stok kurang, maksimal tersedia $barang->stok barang.");
         }
 
         $carts = $request->all();

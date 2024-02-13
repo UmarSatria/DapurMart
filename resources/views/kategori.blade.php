@@ -37,7 +37,6 @@
     </thead>
     <tbody>
         @foreach ($data as $key => $row)
-
         <tr>
             <th scope="row">{{++$key}}</th>
             <td>{{$row->kategori}}</td>

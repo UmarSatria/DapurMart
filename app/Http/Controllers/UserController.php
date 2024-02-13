@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Galeri;
+use App\Models\Sosmed;
 
 class UserController extends Controller
 {
@@ -12,8 +13,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $galleries = Galeri::all();
-        return view('layouts.grosir', compact('galleries'));
+        $galleries = Galeri::first();
+        $sosmed = Sosmed::all();
+        return view('layouts.grosir', compact('galleries', 'sosmed'));
     }
 
     /**

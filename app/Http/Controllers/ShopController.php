@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
 use Illuminate\Http\Request;
+use App\Models\Barang;
+use App\Models\Sosmed;
+
 
 class ShopController extends Controller
 {
@@ -12,6 +14,7 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {
+        $sosmed = Sosmed::all();
         $query = $request->input('search');
 
         if ($query) {
@@ -20,7 +23,7 @@ class ShopController extends Controller
             $shops = Barang::paginate(3);
         }
 
-        return view('shop', compact('shops', 'query'));
+        return view('shop', compact('shops', 'query', 'sosmed'));
 
     }
 

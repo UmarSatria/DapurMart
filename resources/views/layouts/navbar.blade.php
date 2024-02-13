@@ -9,6 +9,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dk Grocery</title>
 
+    <style>
+         .header__top__right__social {
+        position: relative;
+    }
+
+    .social-data {
+        display: none;
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        z-index: 999;
+    }
+    </style>
+
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     {{-- icon --}}
@@ -78,12 +97,18 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
+                            @foreach ($sosmed as $sosm)
                             <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                                <a href="#" class="social-icon" data-target="facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="social-icon" data-target="twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="social-icon" data-target="linkedin"><i class="fa fa-linkedin"></i></a>
+                                <a href="#" class="social-icon" data-target="pinterest"><i class="fa fa-pinterest-p"></i></a>
+                                <div class="social-data" id="facebook-data">{{ $sosm->facebook }}</div>
+                                <div class="social-data" id="twitter-data">{{ $sosm->twitter }}</div>
+                                <div class="social-data" id="linkedin-data">{{ $sosm->linkedin }}</div>
+                                <div class="social-data" id="pinterest-data">{{ $sosm->pinterest }}</div>
                             </div>
+                        @endforeach
 
                             <div class="header__top__right__auth">
                                 <div class="d-flex">
@@ -326,8 +351,25 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const socialIcons = document.querySelectorAll('.social-icon');
 
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseenter', function() {
+                    const target = this.getAttribute('data-target');
+                    const socialData = document.getElementById(`${target}-data`);
+                    socialData.style.display = 'block';
+                });
 
+                icon.addEventListener('mouseleave', function() {
+                    const target = this.getAttribute('data-target');
+                    const socialData = document.getElementById(`${target}-data`);
+                    socialData.style.display = 'none';
+                });
+            });
+        });
+    </script>
 
 </body>
 

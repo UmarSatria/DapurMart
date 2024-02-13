@@ -32,7 +32,6 @@
     </div>
 
 
-
     <table class="table">
         <thead class="table-success">
             <tr>

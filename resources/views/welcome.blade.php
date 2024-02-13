@@ -107,7 +107,7 @@
                                         <a role="button" class="mx-3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre > <i class="fa-solid fa-user"></i>
                                             {{ Auth::user()->name }}
                                         </a>
-
+                                        
                                             <a href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();"><i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -122,8 +122,6 @@
                                     @endguest
 
                                 </div>
-
-
                                 {{-- <a href="{{route('login')}}"><i class="fa fa-user"></i>Login</a> --}}
                             </div>
                         </div>
@@ -214,14 +212,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+                    @if (isset($galeri[0]))
+                    <div class="hero__item set-bg" data-setbg="{{ asset('images/' . $galeri[0]->image) }}">
                         <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
+                            <span>{{ $galeri[0]->title }}</span>
+                            <h2>{{ $galeri[0]->slogan }}</h2>
+                            <p>{{ $galeri[0]->deskripsi }}</p>
                             <a href="#" class="primary-btn">SHOP NOW</a>
                         </div>
                     </div>
+                @else
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong class="font-bold">Data tidak tersedia!</strong>
+                        <span class="block sm:inline">Tidak ada data galeri yang tersedia saat ini.</span>
+                    </div>
+                @endif
+
                 </div>
             </div>
         </div>

@@ -34,6 +34,11 @@ class GaleriController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'slogan' => 'required|string',
             'deskripsi' => 'required|string',
+        ],[
+            'title' => 'Isi judul untuk galeri',
+            'image' => 'Isi gambar untuk galeri',
+            'slogan' => 'Isi slogan untuk galeri',
+            'deskripsi' => 'Isi deskripsi galeri',
         ]);
 
         // Upload image
@@ -64,7 +69,6 @@ class GaleriController extends Controller
      */
     public function edit(Galeri $galeri)
     {
-        //
     }
 
     /**
@@ -72,7 +76,35 @@ class GaleriController extends Controller
      */
     public function update(Request $request, Galeri $galeri)
     {
-        //
+        $galleries = Galeri::all();
+        $request->validate([
+            'title' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'slogan' => 'required|string',
+            'deskripsi' => 'required|string',
+        ]);
+
+        // update data
+        $galeri->title = $request->title;
+        $galeri->slogan = $request->slogan;
+        $galeri->deskripsi = $request->deskripsi;
+
+        // edit foto
+        if ($request->hasFile('image')) {
+            // upload foto
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'). $imageName);
+            // hapus foto
+            if (file_exists(public_path('images/' . $galeri->image))) {
+                unlink(public_path('images/' . $galeri->image));
+            }
+            $galeri->image = $imageName;
+        }
+
+        $galeri->save();
+
+        return redirect()->route('galeri.index')->with('success', 'Galeri berhasil diperbarui.');
+
     }
 
     /**
@@ -80,6 +112,12 @@ class GaleriController extends Controller
      */
     public function destroy(Galeri $galeri)
     {
-        //
+        if ($galeri->image) {
+            unlink(public_path('images/' . $galeri->image));
+        }
+
+        $galeri->delete();
+
+        return redirect()->route('galeri.index')->with('success', 'Galeri berhasil dihapus.');
     }
 }
