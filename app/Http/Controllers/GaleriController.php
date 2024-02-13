@@ -69,6 +69,7 @@ class GaleriController extends Controller
      */
     public function edit(Galeri $galeri)
     {
+        
     }
 
     /**

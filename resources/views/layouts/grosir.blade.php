@@ -36,15 +36,15 @@
                             </div>
                             <div class="hero__search__phone__text">
                                 @foreach ($sosmed as $sosm)
-                                <h5>+{{$sosm->telepon}}</h5>
+                                <h5>{{ '+' . $sosm->telepon}}</h5>
                                 @endforeach
                                 <span>support 24/7 time</span>
                             </div>
                         </div>
                     </div>
-                        <div class="hero__item set-bg" data-setbg="{{ asset($galleries->image) }}">
+                        <div class="hero__item set-bg" data-setbg="{{ asset('images/' . $galleries->image) }}">
                             <div class="hero__text">
-                                <img src="{{ asset($galleries->image) }}" alt="" width="100%">
+                                {{-- <img src="{{ asset($galleries->image) }}" alt=""> --}}
                                 <span>{{ $galleries->title }}</span>
                                 <h2>{{ $galleries->slogan }}</h2>
                                 <p>{{ $galleries->deskripsi }}</p>
