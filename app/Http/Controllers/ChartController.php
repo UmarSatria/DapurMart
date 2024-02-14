@@ -41,7 +41,6 @@ class ChartController extends Controller
         Chart::create($request->all());
         return redirect()->back()->with('success', 'Berhasil ditambahkan ke keranjang');
 
-
     }
 
     /**

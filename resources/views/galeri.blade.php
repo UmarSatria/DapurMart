@@ -32,18 +32,27 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload file</label>
                             <input type="file" id="file_input" name="image"
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                            @error('image')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="col-span-2">
                             <label for="title"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
                             <input type="text" id="title" name="title" placeholder="Title product"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            @error('title')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="col-span-2">
                             <label for="slogan"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slogan</label>
                             <input type="text" id="slogan" name="slogan" placeholder="Slogan product"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            @error('slogan')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="col-span-2">
                             <label for="description"
@@ -51,6 +60,9 @@
                                 Product</label>
                             <textarea id="description" name="deskripsi" rows="4" placeholder="Berikan Deskripsi"
                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                            @error('deskripsi')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <button type="submit"
@@ -64,7 +76,6 @@
                         Tambahkan
                     </button>
                 </form>
-
             </div>
         </div>
     </div>
@@ -169,9 +180,11 @@
 
     <div class="" style="display: flex;">
         @foreach ($galleries as $gallery)
-            <div class="max-w-sm ml-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div
+                class="max-w-sm ml-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex justify-center items-center h-48">
-                    <img src="{{ asset('images/' . $gallery->image) }}" class="card-img-top" alt="{{ $gallery->title }}">
+                    <img src="{{ asset('images/' . $gallery->image) }}" class="card-img-top"
+                        alt="{{ $gallery->title }}">
                 </div>
                 <div class="p-5">
                     <h5 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">{{ $gallery->title }}</h5>
@@ -213,33 +226,34 @@
                                         </svg>
                                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda yakin
                                             ingin menghapus data ini?</h3>
-                                        <button data-modal-hide="popup-modal" type="button"
-                                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
-                                            Hapus
-                                        </button>
-                                        <button data-modal-hide="popup-modal" type="button"
-                                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
-                                            Batal</button>
+                                        <form action="{{ route('galeri.destroy', $galeri->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button data-modal-hide="popup-modal" type="submit"
+                                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                                Hapus
+                                            </button>
+                                            <button data-modal-hide="popup-modal" type="button"
+                                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
+                                                Batal</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {{-- DELETE --}}
-                        <form action="{{ route('galeri.destroy', $galeri->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="block text-white font-medium rounded-lg text-sm px-5 py-2.5
+
+                        <button type="button"
+                            class="block text-white font-medium rounded-lg text-sm px-5 py-2.5
                                     text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                data-modal-target="popup-modal" data-modal-toggle="popup-modal">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 6.2 7 9.4l5 3.2-5 3.2-5-3.3 5-3.1-5-3.2L7 3l5 3.2ZM7 17.8l5-3.2 5 3.2-5 3.2-5-3.2Z" />
-                                    <path d="m12 12.5 5-3.1-5-3.2L17 3l5 3.2-5 3.2 5 3.2-5 3.2-5-3.3Z" />
-                                </svg>
-                            </button>
-                        </form>
+                            data-modal-target="popup-modal" data-modal-toggle="popup-modal">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 6.2 7 9.4l5 3.2-5 3.2-5-3.3 5-3.1-5-3.2L7 3l5 3.2ZM7 17.8l5-3.2 5 3.2-5 3.2-5-3.2Z" />
+                                <path d="m12 12.5 5-3.1-5-3.2L17 3l5 3.2-5 3.2 5 3.2-5 3.2-5-3.3Z" />
+                            </svg>
+                        </button>
 
                         {{-- END DELETE --}}
                     </div>

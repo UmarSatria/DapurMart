@@ -26,7 +26,6 @@ class KategoriController extends Controller
 
         return view('kategori', compact('data', 'search'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
