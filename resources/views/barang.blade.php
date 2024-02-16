@@ -48,7 +48,7 @@
         <tbody>
             @foreach ($data as $key => $row)
                 <tr>
-                    <td>{{ $startingNumber++ }}</td>
+                    <td>{{++$key}}</td>
                     <td><img src="{{ asset('storage/' . $row->gambar_produk) }}" alt="" width="80vw"
                             height="100vw">
                     </td>

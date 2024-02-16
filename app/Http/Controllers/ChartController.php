@@ -22,6 +22,7 @@ class ChartController extends Controller
 
         $cart = Chart::all();
         $sosmed = Sosmed::all();
+
         return view('chart', compact('cart', 'sosmed'));
     }
 
@@ -86,7 +87,6 @@ class ChartController extends Controller
         ]);
 
         $cart = Chart::findOrFail($id);
-        // dd($cart);
 
         $barang = Barang::findOrFail($cart->barang_id);
         if ($request->jumlah_pembelian <= $barang->stok) {

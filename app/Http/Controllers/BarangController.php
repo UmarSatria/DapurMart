@@ -19,23 +19,16 @@ class BarangController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $query = Barang::query();
+        $query = Barang::query()->latest();
 
     if ($search) {
-        // Jika ada pencarian, filter data berdasarkan nama_produk
         $query->where('nama_produk', 'like', '%' . $search . '%');
     }
 
     $data = $query->paginate(3);
     $kategori = Kategori::all();
 
-    // Mendapatkan nomor halaman saat ini
-    $currentPage = $data->currentPage();
-
-    // Hitung nomor urut mulai dari 1
-    $startingNumber = ($currentPage - 1) * $data->perPage() + 1;
-
-    return view('barang', compact('data', 'kategori', 'startingNumber', 'search'));
+    return view('barang', compact('data', 'kategori', 'search'));
     }
 
     /**
@@ -144,13 +137,13 @@ class BarangController extends Controller
     public function destroy($id)
     {
         try {
+            
             $data = Barang::findOrFail($id);
             $data->delete();
 
             return redirect()->route('barang.index')->with('success', 'Berhasil menghapus data.');
 
         } catch (Exception $e) {
-            // Tangkap dan tangani eksepsi di sini
 
             return redirect()->route('barang.index')->with('warning', 'Gagal menghapus data karena data masih digunakan.');
         }

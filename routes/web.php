@@ -7,7 +7,6 @@ use App\Http\Controllers\FilterKategoriController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ShopController;
@@ -31,11 +30,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// LOGIN PAGE
-// Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLogin'])->name('login');
 Auth::routes([
     'verify' => true,
 ]);
@@ -56,6 +50,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::resource('sosmed', SosmedController::class);
     Route::resource('kategori', KategoriController::class);
     Route::resource('barang', BarangController::class);
+
     // GALERI
     Route::get('galeri/create', [GaleriController::class, 'create'])->name('galeri.create');
     Route::get('galeri', [GaleriController::class, 'index'])->name('galeri.index');
@@ -70,24 +65,9 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::delete('/sosmed/{sosmed}', [SosmedController::class, 'destroy'])->name('sosmed.destroy');
 });
 
-// Route::middleware(['auth', 'role:User'])->group(function (){
-//     Route::resource('grosir', UserController::class);
-// });
-
-// HOME PAGE WEB
-// Route::get('/grosir', function () {
-//     return view('layouts.grosir');
-// })->name('grosir');
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
-
-// Route::get('admin', function(){
-//     return view('layouts.sidebar');
-// });
 
 Route::resource('pesanan', PesananController::class);
 
-Route::resource('coba', NavbarController::class);
 Route::resource('filter-kategori', FilterKategoriController::class);
 
 Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');

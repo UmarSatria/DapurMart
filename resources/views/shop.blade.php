@@ -43,7 +43,7 @@
                                 </form>
                             </div>
                         </div>
-                      </div>
+                    </div>
                     {{-- <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
                             <i class="fa fa-phone"></i>

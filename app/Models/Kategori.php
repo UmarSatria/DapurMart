@@ -12,7 +12,7 @@ class Kategori extends Model
 
     protected $table = 'kategoris';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $guarded = ['id'];
     public $incrementing = true;
     public $timestamps = true;
 

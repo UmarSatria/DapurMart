@@ -11,7 +11,7 @@ class Pembayaran extends Model
 
     protected $table = 'pembayarans';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $guarded = ['id'];
     public $incrementing = true;
     public $timestamps = true;
 

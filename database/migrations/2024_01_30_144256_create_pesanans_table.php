@@ -20,10 +20,6 @@ return new class extends Migration
             $table->integer('jumlah_pembelian');
             $table->bigInteger('total');
             $table->enum('status', ['menunggu pembayaran','menunggu konfirmasi','ditolak', 'selesai'])->default('menunggu pembayaran');
-
-            // $table->string('bukti');
-            // $table->enum('status', ['menunggu konfirmasi', 'selesai'])->default('menunggu konfirmasi');
-            // $table->unsignedInteger('total_pembayaran'); // Gunakan unsignedInteger jika total_pembayaran tidak boleh negatif.
             $table->timestamps();
         });
     }

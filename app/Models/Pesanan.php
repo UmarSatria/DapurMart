@@ -10,7 +10,7 @@ class Pesanan extends Model
     use HasFactory;
     protected $table = 'pesanans';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $guarded = ['id'];
     public $incrementing = true;
     public $timestamps = true;
 

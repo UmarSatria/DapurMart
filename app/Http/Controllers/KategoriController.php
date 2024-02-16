@@ -65,12 +65,10 @@ class KategoriController extends Controller
      */
     public function update(KategoriRequest $request, $id)
     {
-        // Validasi data
         $request->validate([
             'kategori' => 'required',
         ]);
 
-        // Temukan data yang akan diubah
         $kategori = Kategori::findOrFail($id);
 
         // Update data
@@ -78,7 +76,6 @@ class KategoriController extends Controller
             'kategori' => $request->input('kategori'),
         ]);
 
-        // Redirect atau tindakan lain setelah pembaruan
         return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui');
     }
 
@@ -94,7 +91,6 @@ class KategoriController extends Controller
             return redirect()->route('kategori.index')->with('success', 'Berhasil menghapus data.');
 
         } catch (Exception $e) {
-            // Tangkap dan tangani eksepsi di sini
 
             return redirect()->route('kategori.index')->with('warning', 'Gagal menghapus data karena data masih digunakan.');
         }

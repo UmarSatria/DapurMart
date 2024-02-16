@@ -11,7 +11,7 @@ class Chart extends Model
 
     protected $table = 'charts';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $guarded = ['id'];
     public $incrementing = true;
     public $timestamps = true;
 
