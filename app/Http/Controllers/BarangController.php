@@ -21,14 +21,14 @@ class BarangController extends Controller
         $search = $request->input('search');
         $query = Barang::query()->latest();
 
-    if ($search) {
-        $query->where('nama_produk', 'like', '%' . $search . '%');
-    }
+        if ($search) {
+            $query->where('nama_produk', 'like', '%' . $search . '%');
+        }
 
-    $data = $query->paginate(3);
-    $kategori = Kategori::all();
+        $data = $query->paginate(3);
+        $kategori = Kategori::all();
 
-    return view('barang', compact('data', 'kategori', 'search'));
+        return view('barang', compact('data', 'kategori', 'search'));
     }
 
     /**
@@ -96,38 +96,38 @@ class BarangController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Barang $barang)
-{
-    $request->validate([
-        'gambar_produk' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'nama_produk' => 'required',
-        'harga_satuan' => 'required|numeric|min:1',
-        'stok' => 'required|numeric|min:1',
-        'deskripsi' => 'required',
-    ], [
-        'gambar_produk.required' => 'Data harus diisi',
-        'nama_produk.required' => 'Data harus diisi',
-        'harga_satuan.required' => 'Data harus diisi',
-        'harga_satuan.numeric' => 'Data harus berupa angka',
-        'harga_satuan.min' => 'Data tidak boleh kurang dari 1',
-        'stok.required' => 'Data harus diisi',
-        'stok.numeric' => 'Data harus berupa angka',
-        'stok.min' => 'Data tidak boleh kurang dari 1',
-        'deskripsi.required' => 'Data harus diisi',
-    ]);
+    {
+        $request->validate([
+            'gambar_produk' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'nama_produk' => 'required',
+            'harga_satuan' => 'required|numeric|min:1',
+            'stok' => 'required|numeric|min:1',
+            'deskripsi' => 'required',
+        ], [
+            'gambar_produk.required' => 'Data harus diisi',
+            'nama_produk.required' => 'Data harus diisi',
+            'harga_satuan.required' => 'Data harus diisi',
+            'harga_satuan.numeric' => 'Data harus berupa angka',
+            'harga_satuan.min' => 'Data tidak boleh kurang dari 1',
+            'stok.required' => 'Data harus diisi',
+            'stok.numeric' => 'Data harus berupa angka',
+            'stok.min' => 'Data tidak boleh kurang dari 1',
+            'deskripsi.required' => 'Data harus diisi',
+        ]);
 
-    $data = $request->all();
-    if ($request->hasFile('gambar_produk')) {
-        $gambar_produk = $request->file('gambar_produk');
-        $data['gambar_produk'] = Str::random(20) . '.' . $gambar_produk->getClientOriginalExtension();
-        Storage::disk('public')->put($data['gambar_produk'], file_get_contents($gambar_produk));
-        Storage::disk('public')->delete($barang->gambar_produk);
-    } else {
-        $data['gambar_produk'] = $barang->gambar_produk;
+        $data = $request->all();
+        if ($request->hasFile('gambar_produk')) {
+            $gambar_produk = $request->file('gambar_produk');
+            $data['gambar_produk'] = Str::random(20) . '.' . $gambar_produk->getClientOriginalExtension();
+            Storage::disk('public')->put($data['gambar_produk'], file_get_contents($gambar_produk));
+            Storage::disk('public')->delete($barang->gambar_produk);
+        } else {
+            $data['gambar_produk'] = $barang->gambar_produk;
+        }
+
+        $barang->update($data);
+        return redirect()->back()->with('success', 'Berhasil update data');
     }
-
-    $barang->update($data);
-    return redirect()->back()->with('success', 'Berhasil update data');
-}
 
 
 
@@ -137,7 +137,7 @@ class BarangController extends Controller
     public function destroy($id)
     {
         try {
-            
+
             $data = Barang::findOrFail($id);
             $data->delete();
 

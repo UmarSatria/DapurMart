@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pembayaran;
 use App\Models\Pesanan;
 use App\Models\Sosmed;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -95,7 +96,7 @@ class PesananController extends Controller
             $pesanan->update(['status' => $request->input('status')]);
 
             return redirect()->back()->with('success', 'Status Pesanan berhasil diperbarui');
-        } catch (\Exception $e) {
+        } catch ( Exception $e) {
 
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }

@@ -44,22 +44,20 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
-// login admin
+
 Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::resource('home', HomeController::class);
     Route::resource('sosmed', SosmedController::class);
     Route::resource('kategori', KategoriController::class);
     Route::resource('barang', BarangController::class);
 
-    // GALERI
     Route::get('galeri/create', [GaleriController::class, 'create'])->name('galeri.create');
     Route::get('galeri', [GaleriController::class, 'index'])->name('galeri.index');
     Route::post('galeri', [GaleriController::class, 'store'])->name('galeri.store');
     Route::put('/galeri/{galeri}', [GaleriController::class, 'update'])->name('galeri.update');
     Route::delete('/galeri/{galeri}', [GaleriController::class, 'destroy'])->name('galeri.destroy');
 
-    // sosmed
-    Route::post('/sosmed', [SosmedController::class, 'store'])->name('sosmed.store');
+     Route::post('/sosmed', [SosmedController::class, 'store'])->name('sosmed.store');
     Route::get('/sosmed/{sosmed}/edit', [SosmedController::class, 'edit'])->name('sosmed.edit');
     Route::put('/sosmed/{sosmed}', [SosmedController::class, 'update'])->name('sosmed.update');
     Route::delete('/sosmed/{sosmed}', [SosmedController::class, 'destroy'])->name('sosmed.destroy');

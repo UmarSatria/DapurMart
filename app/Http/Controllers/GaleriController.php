@@ -41,11 +41,10 @@ class GaleriController extends Controller
             'deskripsi' => 'Isi deskripsi galeri',
         ]);
 
-        // Upload image
+
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
 
-        // Save galeri data
         $galeri = new Galeri();
         $galeri->title = $request->title;
         $galeri->image = $imageName;
@@ -85,17 +84,15 @@ class GaleriController extends Controller
             'deskripsi' => 'required|string',
         ]);
 
-        // update data
         $galeri->title = $request->title;
         $galeri->slogan = $request->slogan;
         $galeri->deskripsi = $request->deskripsi;
 
-        // edit foto
         if ($request->hasFile('image')) {
-            // upload foto
+
             $imageName = time().'.'.$request->image->extension();
             $request->image->move(public_path('images'). $imageName);
-            // hapus foto
+
             if (file_exists(public_path('images/' . $galeri->image))) {
                 unlink(public_path('images/' . $galeri->image));
             }

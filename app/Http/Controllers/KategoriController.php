@@ -37,7 +37,7 @@ class KategoriController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(KategoriRequest $request)
+    public function store( Request $request)
     {
         Kategori::create($request->all());
         return to_route('kategori.index')->with('success', 'Data berhasil ditambahkan');
@@ -63,7 +63,7 @@ class KategoriController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(KategoriRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'kategori' => 'required',
